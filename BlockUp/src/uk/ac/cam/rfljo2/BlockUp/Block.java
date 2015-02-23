@@ -5,9 +5,6 @@ package uk.ac.cam.rfljo2.BlockUp;
  * @author Robin Otter
  * @author Alastair Toft
  * @author Tom Read-Cutting
- * 
- * Alastair is a bit of a poo
- *
  */
 public abstract class Block {
 	
@@ -20,7 +17,6 @@ public abstract class Block {
 	private Cell pivotPoint; // The point at which the block pivots / rotates
 	
 	private byte mBlockType;
-	//This is a comment to see if things go wrong on git
 	
 	public byte getBlockType() {
 		return mBlockType;
