@@ -4,6 +4,7 @@ package uk.ac.cam.rfljo2.BlockUp;
  * A representation of a block in the game.
  * @author Robin Otter
  * @author Alastair Toft
+ * @author Tom Read Cutting
  *
  */
 public abstract class Block {
