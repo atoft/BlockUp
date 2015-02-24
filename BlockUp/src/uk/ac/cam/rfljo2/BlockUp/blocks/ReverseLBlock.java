@@ -1,5 +1,5 @@
-package uk.ac.cam.rfljo2.BlockUp;
-
+package uk.ac.cam.rfljo2.BlockUp.blocks;
+import uk.ac.cam.rfljo2.BlockUp.*;
 import java.util.LinkedList;
 import java.util.Queue;
 

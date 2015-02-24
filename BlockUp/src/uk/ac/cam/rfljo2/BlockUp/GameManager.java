@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.swing.Timer;
 
 import uk.ac.cam.rfljo2.BlockUp.input.ControlListener;
+import uk.ac.cam.rfljo2.BlockUp.blocks.*;
 
 
 /**

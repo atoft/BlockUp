@@ -1,7 +1,6 @@
 package uk.ac.cam.rfljo2.BlockUp;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import uk.ac.cam.rfljo2.BlockUp.blocks.*;
 
 /**
  * A representation of a BlockUp Game Board. Will keep track of which cells in the game are occupied.

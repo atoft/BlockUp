@@ -1,4 +1,4 @@
-package uk.ac.cam.rfljo2.BlockUp;
+package uk.ac.cam.rfljo2.BlockUp.blocks;
 
 
 /**A representation of a single row in the game grid. Allows for addition of
