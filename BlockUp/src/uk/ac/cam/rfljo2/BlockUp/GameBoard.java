@@ -74,8 +74,8 @@ public class GameBoard {
 	 * @return the byte value contained in the specified cell
 	 */
 	public byte getCell(int col, int row) {
-		if (row > mRows.length - 1 || row < 0) return 0; // These need sorting out to bounds check the array TODO
-		if (col > mRows[0].length() - 1 || col < 0) return 0;
+		if (row > mRows.length - 1 || row < 0) return -1; 
+		if (col > mRows[0].length() - 1 || col < 0) return -1;
 		return mRows[row].getCell(col);
 	}
 
