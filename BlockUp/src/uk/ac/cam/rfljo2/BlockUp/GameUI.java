@@ -9,8 +9,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-
 import javax.swing.Timer;
+
+import uk.ac.cam.rfljo2.BlockUp.input.ControlListener;
+import uk.ac.cam.rfljo2.BlockUp.input.KeyBoardControls;
 
 /**
  * @Question Should GameManager and GameUI be integrated into the same Class?
@@ -72,32 +74,13 @@ public class GameUI extends JFrame{
 		addBorder(optionPanel, Strings.GUI_OPTIONS_LABEL);
 		sidePanel.add(optionPanel);
 		
-		//Map key presses to Actions, and use the actions to send inputs to the GameManager object
-	    viewPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "down");
-	    viewPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "up");
-	    viewPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "left");
-	    viewPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "right");
-	    
-	    viewPanel.getActionMap().put("down", new AbstractAction(){
-	    	public void actionPerformed(ActionEvent event){
-	    		gameManager.downInput();
-	    	}
-	    });
-	    viewPanel.getActionMap().put("up", new AbstractAction(){
-	    	public void actionPerformed(ActionEvent event){
-	    		gameManager.upInput();
-	    	}
-	    });
-	    viewPanel.getActionMap().put("left", new AbstractAction(){
-	    	public void actionPerformed(ActionEvent event){
-	    		gameManager.leftInput();
-	    	}
-	    });
-	    viewPanel.getActionMap().put("right", new AbstractAction(){
-	    	public void actionPerformed(ActionEvent event){
-	    		gameManager.rightInput();
-	    	}
-	    });
+		//the code which implements the keyboard controls using the listener
+		//a bit hacky atm but works so good point to commit as I have to go now so can't finish it :(
+		//can't rotate anymore
+		ControlListener cL = gameManager.getControlListener();
+		KeyBoardControls kBC = new KeyBoardControls(viewPanel);
+		kBC.setListener(cL);
+		
 	}
 	
 	

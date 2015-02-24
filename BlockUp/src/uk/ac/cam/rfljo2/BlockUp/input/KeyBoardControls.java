@@ -11,10 +11,11 @@ import javax.swing.KeyStroke;
 public class KeyBoardControls extends ControlObserver {
 	
 	private ControlListener mCL;
-	private JPanel test = new JPanel();
+	private JComponent test = new JPanel();
 	
 	
-	public KeyBoardControls() {
+	public KeyBoardControls(JComponent test2) {
+		test = test2;
 		//Map key presses to Actions, and use the actions to send inputs to the GameManager object
 		test.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "down");
 		test.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "up");

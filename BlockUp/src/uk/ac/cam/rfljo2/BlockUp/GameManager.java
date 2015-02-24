@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
+import uk.ac.cam.rfljo2.BlockUp.input.ControlListener;
+
 
 /**
  * @Question Should GameManager and GameUI be integrated into the same Class?
@@ -43,30 +45,6 @@ public class GameManager {
 			spawnNextBlock();
 			
 		}
-	}
-	
-	//Handling inputs
-	public void leftInput(){
-		board.getActiveBlock().moveLeft();
-		output.refreshScreen(board);
-	}
-	public void rightInput(){
-		board.getActiveBlock().moveRight();
-		
-		output.refreshScreen(board);
-	}
-	public void downInput(){
-		
-		board.getActiveBlock().rotate();
-		
-		output.refreshScreen(board);
-	}
-	public void upInput(){		//Note that the effects of the up and down inputs have been flipped
-		board.getActiveBlock().moveUp();
-		playTimer.restart();
-		output.refreshScreen(board);
-		placementCheck();
-		
 	}
 	
 	public GameManager(GameUI g){
@@ -135,6 +113,114 @@ public class GameManager {
 		gui.setVisible(true);
 		
 		
+	}
+	
+	public void downInput(){
+		
+		board.getActiveBlock().rotate();
+		
+		output.refreshScreen(board);
+	}
+	public void upInput(){		//Note that the effects of the up and down inputs have been flipped
+		board.getActiveBlock().moveUp();
+		playTimer.restart();
+		output.refreshScreen(board);
+		placementCheck();
+		
+	}
+	
+	/**
+	 * Method which returns the control listener.
+	 * First implementation.
+	 * 
+	 * @return
+	 */
+	public ControlListener getControlListener() {
+		return new ControlListener() {
+
+			@Override
+			public void rotateBlockLeft() {
+				
+			}
+
+			@Override
+			public void rotateBlockRight() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void moveBlockLeft() {
+				board.getActiveBlock().moveLeft();
+				output.refreshScreen(board);
+			}
+
+			@Override
+			public void moveBlockRight() {
+				board.getActiveBlock().moveRight();
+				output.refreshScreen(board);
+			}
+
+			@Override
+			public void rotateBlock180() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void speedUpBlock() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void slamBlock() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void pauseGame() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void navigateUp() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void navigateDown() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void navigateLeft() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void navigateRight() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void enter() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void goBack() {
+				// TODO Auto-generated method stub
+				
+			}	
+		};
 	}
 	
 }
