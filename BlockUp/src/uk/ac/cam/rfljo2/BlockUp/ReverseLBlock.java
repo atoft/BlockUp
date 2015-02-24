@@ -50,56 +50,6 @@ public class ReverseLBlock extends Block {
 	}
 	
 
-	@Override
-	public void place(int col, int row, byte rotationState) throws CollisionException, InvalidArgException {
-		if (rotationState < 0 || rotationState > 3) throw new InvalidArgException();
-		Cell c = new Cell(col, row);
-		if (rotationState == 0) {
-			if (getPivotPoint() != null) hideBlock();
-			for (int i = -1; i < 2; i++) {
-				if (mBoard.getCell(col + i, row) != 0) throw new CollisionException();
-			}
-			if (mBoard.getCell(col + 1, row - 1) != 0) throw new CollisionException();
-			setPivotPoint(c);
-			this.setRotationState((byte) 0);
-			setCells();
-			this.showBlock();
-		} else if (rotationState == 1) {
-			if (getPivotPoint() != null) hideBlock();
-			
-			for (int i = -1; i < 2; i++) {
-				if (mBoard.getCell(col, row + i) != 0) throw new CollisionException();
-			}
-			if (mBoard.getCell(col - 1, row - 1) != 0) throw new CollisionException();
-			setPivotPoint(c);
-			this.setRotationState((byte) 1);
-			setCells();
-			this.showBlock();
-		} else if (rotationState == 2) {
-			if (getPivotPoint() != null) hideBlock();
-			
-			for (int i = -1; i < 2; i++) {
-				if (mBoard.getCell(col + i, row) != 0) throw new CollisionException();
-			}
-			if (mBoard.getCell(col - 1, row + 1) != 0) throw new CollisionException();
-			setPivotPoint(c);
-			this.setRotationState((byte) 2);
-			setCells();
-			this.showBlock();
-		} else if (rotationState == 3) {
-			if (getPivotPoint() != null) hideBlock();
-			
-			for (int i = -1; i < 2; i++) {
-				if (mBoard.getCell(col, row + i) != 0) throw new CollisionException();
-			}
-			if (mBoard.getCell(col + 1, row + 1) != 0) throw new CollisionException();
-			setPivotPoint(c);
-			this.setRotationState((byte) 3);
-			setCells();
-			this.showBlock();
-		}
-		
-	}
 
 
 

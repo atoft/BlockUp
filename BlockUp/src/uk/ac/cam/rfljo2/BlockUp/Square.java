@@ -31,23 +31,7 @@ public class Square extends Block {
 	
 	
 
-	@Override
-	public void place(int col, int row, byte rotationState) throws CollisionException, InvalidArgException {
-		if (rotationState < 0 || rotationState > 0) throw new InvalidArgException();
-		Cell c = new Cell(col, row);
-		if (getPivotPoint() != null) hideBlock();
-		for (int i = 0; i < 2; i++) {
-			if (mBoard.getCell(col + i, row) != 0) throw new CollisionException();
-			if (mBoard.getCell(col + i, row - 1) != 0) throw new CollisionException();
-		}
-			
-			
-		setPivotPoint(c);
-		this.setRotationState((byte) 0);
-		setCells();
-		this.showBlock();
-		
-	}
+
 
 
 

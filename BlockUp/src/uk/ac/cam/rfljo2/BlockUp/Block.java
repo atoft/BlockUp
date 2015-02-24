@@ -54,6 +54,37 @@ public abstract class Block {
 	}
 	
 	
+	/**
+	 * Place the block at the specified position on the GameBoard
+	 * @param col the column at which to set the PivotPoint
+	 * @param row the row at which to set the PivotPoint
+	 * @param rotationState the rotation state of the new block when it is placed
+	 * @throws CollisionException if the block is placed where there is already a block or boundary
+	 * @throws InvalidArgException if the rotationState is not valid for the type of block
+	 */
+	public boolean place(int col, int row, byte rotationState) throws CollisionException, InvalidArgException {
+		if (rotationState < 0 || rotationState > 3) throw new InvalidArgException();
+		byte oldRotationState = getRotationState();
+		Cell oldPivotPoint = getPivotPoint();
+		Cell c = new Cell(col, row);
+		if (getPivotPoint() != null) hideBlock();
+		setPivotPoint(c);
+		setRotationState(rotationState);
+		setCells();
+		for (Cell d : mCells) {
+			if (mBoard.getCell(d.getCol(), d.getRow()) != 0)  {
+				setPivotPoint(oldPivotPoint);
+				setRotationState(oldRotationState);
+				setCells();
+				showBlock();
+				return false;
+			}
+		}
+		this.showBlock();
+		return true;
+	}
+		
+	
 
 	
 	public Cell[] getCells() {
@@ -99,15 +130,6 @@ public abstract class Block {
 		this.rotationState = rotationState;
 	}
 
-	/**
-	 * Place the block at the specified position on the GameBoard
-	 * @param col the column at which to set the PivotPoint
-	 * @param row the row at which to set the PivotPoint
-	 * @param rotationState the rotation state of the new block when it is placed
-	 * @throws CollisionException if the block is placed where there is already a block or boundary
-	 * @throws InvalidArgException if the rotationState is not valid for the type of block
-	 */
-	public abstract void place(int col, int row, byte rotationState) throws CollisionException, InvalidArgException;
 	
 	/**
 	 * Rotates the block clockwise by 90*, increasing its rotation state by 1

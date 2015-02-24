@@ -17,37 +17,6 @@ public class LineBlock extends Block {
 
 	
 
-	
-
-	@Override
-	public void place(int col, int row, byte rotationState) throws CollisionException, InvalidArgException {
-		if (rotationState < 0 || rotationState > 1) throw new InvalidArgException();
-		Cell c = new Cell(col, row);
-		if (rotationState == 0) {
-			if (getPivotPoint() != null) hideBlock();
-			for (int i = -2; i < 2; i++) {
-				if (mBoard.getCell(col + i, row) != 0) throw new CollisionException();
-			}
-			
-			
-			setPivotPoint(c);
-			this.setRotationState((byte) 0);
-			setCells();
-			this.showBlock();
-		} else {
-			if (getPivotPoint() != null) hideBlock();
-			
-			for (int i = -2; i < 2; i++) {
-				if (mBoard.getCell(col, row + i) != 0) throw new CollisionException();
-			}
-			setPivotPoint(c);
-			this.setRotationState((byte) 1);
-			setCells();
-			this.showBlock();
-		}
-		
-	}
-
 
 	@Override
 	public void rotate() {
