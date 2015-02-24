@@ -111,9 +111,6 @@ public class GameManager {
 		try {
 			if (board.getActiveBlock().getBlockType() == 3) board.getActiveBlock().place(4, 18, (byte)0);
 			else board.getActiveBlock().place(4, 19, (byte)0);
-		} catch (CollisionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (InvalidArgException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

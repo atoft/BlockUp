@@ -1,5 +1,7 @@
 package uk.ac.cam.rfljo2.BlockUp;
 
+import java.util.Queue;
+
 /**
  * A representation of a block in the game.
  * @author Robin Otter
@@ -14,6 +16,8 @@ public abstract class Block {
 	protected GameBoard mBoard; // Stores a reference to the board occupied by this block
 	
 	protected Cell[] mCells;
+	
+	private Queue<Byte> mRotationQueue;
 	
 	private Cell pivotPoint; // The point at which the block pivots / rotates
 	
@@ -44,7 +48,7 @@ public abstract class Block {
 	 * Constructs a new block, given a reference to a GameBoard to place it on
 	 * @param b a reference to a GameBoard to place the block on
 	 */
-	public Block(GameBoard b) {
+	protected Block(GameBoard b) {
 		isHidden = true; // Block is hidden by default until it is placed
 		pivotPoint = new Cell(-10,-10); // pivotpoint set to an arbitrary value
 		rotationState = 0;
@@ -59,10 +63,10 @@ public abstract class Block {
 	 * @param col the column at which to set the PivotPoint
 	 * @param row the row at which to set the PivotPoint
 	 * @param rotationState the rotation state of the new block when it is placed
-	 * @throws CollisionException if the block is placed where there is already a block or boundary
 	 * @throws InvalidArgException if the rotationState is not valid for the type of block
+	 * @return true if the block can be successfully placed without collision
 	 */
-	public boolean place(int col, int row, byte rotationState) throws CollisionException, InvalidArgException {
+	public boolean place(int col, int row, byte rotationState) throws InvalidArgException {
 		if (rotationState < 0 || rotationState > 3) throw new InvalidArgException();
 		byte oldRotationState = getRotationState();
 		Cell oldPivotPoint = getPivotPoint();
@@ -135,16 +139,29 @@ public abstract class Block {
 	 * Rotates the block clockwise by 90*, increasing its rotation state by 1
 	 *
 	 */
-	public abstract void rotate();
+	public void rotate() {
+		byte b = mRotationQueue.poll();
+		try {
+			this.place(getPivotPoint().getCol(), getPivotPoint().getRow(),b); // Try to place the block rotated 90*
+			mRotationQueue.add(b);
+		} catch (InvalidArgException e) {
+			showBlock(); // Show the block in its original position if the move fails
+			mRotationQueue.add(b);
+		}
+	}
 	
 	
+	public void setRotationQueue(Queue<Byte> mRotationStates) {
+		this.mRotationQueue = mRotationStates;
+	}
+
 	/**
 	 * Attempts to move the block left one unit. If this raises an exception then the block remains in its original position
 	 */
 	public void moveLeft() {
 		try {
 			this.place(getPivotPoint().getCol() - 1, getPivotPoint().getRow(),getRotationState()); // Try to place the block one unit to the left
-		} catch (CollisionException | InvalidArgException e) {
+		} catch (InvalidArgException e) {
 			showBlock(); // Show the block in its original position if the move fails
 		}
 	}
@@ -155,7 +172,7 @@ public abstract class Block {
 	public void moveRight() {
 		try {
 			this.place(getPivotPoint().getCol() + 1, getPivotPoint().getRow(), getRotationState()); // Try to place the block one unit to the right
-		} catch (CollisionException | InvalidArgException e) {
+		} catch (InvalidArgException e) {
 
 			showBlock(); // Show the block in its original position if the move fails
 		}
@@ -166,10 +183,11 @@ public abstract class Block {
 	 */
 	public void moveUp() {
 		try {
-			this.place(getPivotPoint().getCol(), getPivotPoint().getRow() - 1, getRotationState()); // Try to place the block one unit up
-		} catch (CollisionException | InvalidArgException e) {
+			boolean b = this.place(getPivotPoint().getCol(), getPivotPoint().getRow() - 1, getRotationState()); // Try to place the block one unit up
+			if (b == false) isPlaced = true; // If an up move fails, the block is placed there
+		} catch (InvalidArgException e) {
 			showBlock(); // Show the block in its original position if the move fails
-			isPlaced = true; // If an up move fails, the block is placed there.
+			
 		}
 	}
 	/**

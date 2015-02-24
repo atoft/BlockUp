@@ -1,4 +1,7 @@
 package uk.ac.cam.rfljo2.BlockUp;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 /**
  * Represents an L Block in BlockUp
@@ -11,6 +14,13 @@ public class LBlock extends Block {
 		super(b);
 		setBlockType((byte) 3);
 		setCells();
+		Queue<Byte> q = new LinkedList<Byte>();
+		q.add((byte) 1);
+		q.add((byte) 2);
+		q.add((byte) 3);
+		q.add((byte) 0);
+		this.setRotationQueue(q);
+		
 	}
 
 	@Override
@@ -54,24 +64,6 @@ public class LBlock extends Block {
 	
 
 
-
-	@Override
-	public void rotate() {
-		if (getRotationState() == 3)
-			try {
-				place(this.getPivotPoint().getCol(),this.getPivotPoint().getRow(),(byte) 0);
-			} catch (CollisionException e) {
-			} catch (InvalidArgException e) {
-			}
-		else
-			try {
-				place(this.getPivotPoint().getCol(),this.getPivotPoint().getRow(),(byte) (getRotationState() + 1));
-			} catch (CollisionException | InvalidArgException e) {
-				
-			}
-		
-		
-	}
 
 
 

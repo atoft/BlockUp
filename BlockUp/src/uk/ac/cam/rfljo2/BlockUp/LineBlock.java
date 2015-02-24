@@ -1,5 +1,8 @@
 package uk.ac.cam.rfljo2.BlockUp;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Line Block
  * @author Robin Otter
@@ -13,30 +16,15 @@ public class LineBlock extends Block {
 		super(b);
 		setBlockType((byte) 1);
 		setCells();
+		Queue<Byte> q = new LinkedList<Byte>();
+		q.add((byte) 1);
+		q.add((byte) 0);
+		this.setRotationQueue(q);
 	}
 
 	
 
 
-	@Override
-	public void rotate() {
-		if (getRotationState() == 0)
-			try {
-				place(this.getPivotPoint().getCol(),this.getPivotPoint().getRow(),(byte) 1);
-			} catch (CollisionException e) {
-				showBlock();
-			} catch (InvalidArgException e) {
-				showBlock();
-			}
-		else
-			try {
-				place(this.getPivotPoint().getCol(),this.getPivotPoint().getRow(),(byte) 0);
-			} catch (CollisionException | InvalidArgException e) {
-				showBlock();
-			}
-		
-		
-	}
 
 
 
