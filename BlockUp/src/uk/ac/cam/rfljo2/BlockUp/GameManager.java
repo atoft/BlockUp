@@ -115,20 +115,6 @@ public class GameManager {
 		
 	}
 	
-	public void downInput(){
-		
-		board.getActiveBlock().rotate();
-		
-		output.refreshScreen(board);
-	}
-	public void upInput(){		//Note that the effects of the up and down inputs have been flipped
-		board.getActiveBlock().moveUp();
-		playTimer.restart();
-		output.refreshScreen(board);
-		placementCheck();
-		
-	}
-	
 	/**
 	 * Method which returns the control listener.
 	 * First implementation.
@@ -140,12 +126,12 @@ public class GameManager {
 
 			@Override
 			public void rotateBlockLeft() {
-				
+				board.getActiveBlock().rotateLeft();
+				output.refreshScreen(board);
 			}
 
 			@Override
 			public void rotateBlockRight() {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -169,8 +155,10 @@ public class GameManager {
 
 			@Override
 			public void speedUpBlock() {
-				// TODO Auto-generated method stub
-				
+				board.getActiveBlock().moveUp();
+				playTimer.restart();
+				output.refreshScreen(board);
+				placementCheck();
 			}
 
 			@Override

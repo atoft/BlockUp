@@ -2,6 +2,7 @@ package uk.ac.cam.rfljo2.BlockUp.input;
 
 /**
  * This interface defines all the possible control options that there are in the game.
+ * All of the inputs are overridden in an anonymous class in GameManager.
  * 
  * @author Tom Read-Cutting
  *

@@ -27,22 +27,28 @@ public class KeyBoardControls extends ControlObserver {
 	public void setListener(ControlListener cL) {
 		mCL = cL;
 		
+		//associate the correct controllistener events with the correct key-bindings.
 		test.getActionMap().put("down", new AbstractAction(){
 	    	public void actionPerformed(ActionEvent event){
 	    		mCL.navigateDown();
+	    		mCL.rotateBlockLeft();
 	    	}
 	    });
+		
 		test.getActionMap().put("up", new AbstractAction(){
 	    	public void actionPerformed(ActionEvent event){
 	    		mCL.navigateUp();
+	    		mCL.speedUpBlock();
 	    	}
 	    });
+		
 		test.getActionMap().put("left", new AbstractAction(){
 	    	public void actionPerformed(ActionEvent event){
 	    		mCL.navigateLeft();
 	    		mCL.moveBlockLeft();
 	    	}
 	    });
+		
 		test.getActionMap().put("right", new AbstractAction(){
 	    	public void actionPerformed(ActionEvent event){
 	    		mCL.navigateRight();

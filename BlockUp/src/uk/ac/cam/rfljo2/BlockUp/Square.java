@@ -36,7 +36,7 @@ public class Square extends Block {
 
 
 	@Override
-	public void rotate() {
+	public void rotateLeft() {
 		// Square cannot rotate.
 	}
 

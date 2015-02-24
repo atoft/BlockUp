@@ -187,7 +187,7 @@ public abstract class Block {
 	 * Rotates the block clockwise by 90*, increasing its rotation state by 1
 	 *
 	 */
-	public void rotate() {
+	public void rotateLeft() {
 		byte b = mRotationQueue.poll();
 		try {
 			// try to place the block rotated 90* clockwise
