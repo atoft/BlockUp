@@ -134,7 +134,7 @@ public abstract class Block {
 		try {
 			this.place(getPivotPoint().getCol() + 1, getPivotPoint().getRow(), getRotationState()); // Try to place the block one unit to the right
 		} catch (CollisionException | InvalidArgException e) {
-			System.out.println("Cheese");
+
 			showBlock(); // Show the block in its original position if the move fails
 		}
 	}
