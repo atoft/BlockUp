@@ -29,7 +29,7 @@ public class GameUI extends JFrame{
 	
 	
 	
-	public GameUI(){
+	public GameUI() {
 		super(Strings.GAME_NAME);				//Calls the parent constructor, setting the window title
 		
 		

@@ -1,4 +1,4 @@
-package uk.ac.cam.rfljo2.BlockUp;
+package uk.ac.cam.rfljo2.BlockUp.input;
 
 /**
  * This interface defines all the possible control options that there are in the game.
@@ -12,7 +12,11 @@ public interface ControlListener {
 	
 	public void rotateBlockRight();
 	
-	public void rotate180();
+	public void moveBlockLeft();
+	
+	public void moveBlockRight();
+	
+	public void rotateBlock180();
 	
 	public void speedUpBlock();
 	
