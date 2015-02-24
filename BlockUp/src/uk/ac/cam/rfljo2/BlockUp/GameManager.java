@@ -39,17 +39,14 @@ public class GameManager {
 		output.refreshScreen(board);
 	}
 	public void rightInput(){
-		long x = System.nanoTime();
 		board.getActiveBlock().moveRight();
-		long y = System.nanoTime() - x;
-		System.out.println(y);
+		
 		output.refreshScreen(board);
 	}
 	public void downInput(){
-		long x = System.nanoTime();
+		
 		board.getActiveBlock().rotate();
-		long y = System.nanoTime() - x;
-		System.out.println(y);
+		
 		output.refreshScreen(board);
 	}
 	public void upInput(){		//Note that the effects of the up and down inputs have been flipped
@@ -103,7 +100,6 @@ public class GameManager {
 	 * A random block is generated to become the next block.
 	 */
 	public void spawnNextBlock(){
-		System.out.println("new block created");
 		if(board.getNextBlock()!=null){
 			board.setActiveBlock(board.getNextBlock());
 			board.setNextBlock(generateBlock(board));
