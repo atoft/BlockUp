@@ -30,6 +30,8 @@ public class Row {
 	public void setCell(int index, byte value) {
 		if (index > mArray.length - 1 || index < 0) return;
 		mArray[index] = value;
+		if(value==0) mOccupiedCount--;
+		else mOccupiedCount++;
 	}
 	
 	/**
@@ -40,6 +42,7 @@ public class Row {
 	public byte getCell(int index) {
 		if (index > mArray.length - 1 || index < 0) return -1;
 		return mArray[index];
+		
 	}
 	
 	/**
