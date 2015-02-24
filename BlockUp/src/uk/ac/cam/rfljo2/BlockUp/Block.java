@@ -19,6 +19,8 @@ public abstract class Block {
 	
 	private byte mBlockType;
 	
+	private boolean isPlaced;
+	
 	public byte getBlockType() {
 		return mBlockType;
 	}
@@ -44,9 +46,9 @@ public abstract class Block {
 	 */
 	public Block(GameBoard b) {
 		isHidden = true; // Block is hidden by default until it is placed
-		pivotPoint = new Cell(0,0); // pivotpoint set to an arbitrary value
+		pivotPoint = new Cell(-10,-10); // pivotpoint set to an arbitrary value
 		rotationState = 0;
-		
+		isPlaced = false;
 		mBoard = b;
 		mCells = new Cell[4];
 	}
@@ -132,6 +134,7 @@ public abstract class Block {
 		try {
 			this.place(getPivotPoint().getCol() + 1, getPivotPoint().getRow(), getRotationState()); // Try to place the block one unit to the right
 		} catch (CollisionException | InvalidArgException e) {
+			System.out.println("Cheese");
 			showBlock(); // Show the block in its original position if the move fails
 		}
 	}
@@ -144,6 +147,7 @@ public abstract class Block {
 			this.place(getPivotPoint().getCol(), getPivotPoint().getRow() - 1, getRotationState()); // Try to place the block one unit up
 		} catch (CollisionException | InvalidArgException e) {
 			showBlock(); // Show the block in its original position if the move fails
+			isPlaced = true; // If an up move fails, the block is placed there.
 		}
 	}
 	/**
@@ -160,6 +164,15 @@ public abstract class Block {
 	public void setHidden(boolean isHidden) {
 		this.isHidden = isHidden;
 	}
+
+	/**
+	 * @return the isPlaced
+	 */
+	public boolean isPlaced() {
+		return isPlaced;
+	}
+
+
 	
 	
 

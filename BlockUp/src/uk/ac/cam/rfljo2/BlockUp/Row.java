@@ -38,7 +38,7 @@ public class Row {
 	 * @return the contents of the cell at index
 	 */
 	public byte getCell(int index) {
-		if (index > mArray.length - 1 || index < 0) return 0;
+		if (index > mArray.length - 1 || index < 0) return -1;
 		return mArray[index];
 	}
 	

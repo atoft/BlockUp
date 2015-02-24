@@ -110,7 +110,6 @@ public class LBlock extends Block {
 				place(this.getPivotPoint().getCol(),this.getPivotPoint().getRow(),(byte) 0);
 			} catch (CollisionException e) {
 			} catch (InvalidArgException e) {
-				e.printStackTrace();
 			}
 		else
 			try {
