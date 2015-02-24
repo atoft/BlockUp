@@ -29,28 +29,28 @@ public class GameBoard {
 	}
 	
 	/**
-	 * Starting from the bottom of the board, this method creates a list of all the non-full rows, and then copies these into the board, 
-	 * effectively clearing the board of any full rows
+	 * Checks if any rows have been filled. If rows are full, moves all non-full rows
+	 * into a new Row array, fills the remaining cells with new empty Row objects,
+	 * and replaces the original array.
 	 * 
 	 */
 	public void clearRows() {
-
-		Queue<Row> q = new LinkedList<Row>();
-		// Store all rows that are not full in a new Queue
-		for (Row r : mRows) {
-			if (r.isFull() == false) {
-				q.add(r);
+		boolean fullCheck = false;
+		for(Row r : mRows){
+			if (r.isFull()) { fullCheck = true; break; }
+		}
+		if(!fullCheck) return;
+		Row[] newArray = new Row[20];
+		int index = 0;
+		for(Row r : mRows){
+			if(!r.isFull()){
+				newArray[index] = r;
+				index++;
 			}
-		}
-		// Clear every row in the GameBoard
-		for (int i = 0; i < mRows.length; i++) {
-			mRows[i].clear();
-		}
-		int j = 0;
-		
-		// Starting from the bottom, add all the non empty rows back into the gameboard
-		while (q.isEmpty() == false) {
-			mRows[j] = q.poll();
+			for(int j = index; j<20;j++){
+				newArray[index]=new Row(10);
+			}
+			mRows = newArray;
 		}
 	}
 	

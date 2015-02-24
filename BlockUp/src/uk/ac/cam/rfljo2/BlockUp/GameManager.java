@@ -29,9 +29,21 @@ public class GameManager {
 			
 			board.getActiveBlock().moveUp();
 			output.refreshScreen(board);
-			if (board.getActiveBlock().isFinallyPlaced()) spawnNextBlock();
+			placementCheck();
 		}
 	});
+	
+	/**
+	 * If the current block has landed, clear any full rows and
+	 * spawn the next block.
+	 */
+	private void placementCheck(){
+		if (board.getActiveBlock().isFinallyPlaced()){ 
+			board.clearRows();
+			spawnNextBlock();
+			
+		}
+	}
 	
 	//Handling inputs
 	public void leftInput(){
@@ -53,7 +65,7 @@ public class GameManager {
 		board.getActiveBlock().moveUp();
 		playTimer.restart();
 		output.refreshScreen(board);
-		if (board.getActiveBlock().isFinallyPlaced()) spawnNextBlock();
+		placementCheck();
 		
 	}
 	
