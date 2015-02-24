@@ -15,7 +15,7 @@ public class LineBlock extends Block {
 	public LineBlock(GameBoard b) {
 		super(b);
 		setBlockType((byte) 1);
-		setCells();
+		regenerateCells();
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 1);
 		q.add((byte) 0);
@@ -29,7 +29,7 @@ public class LineBlock extends Block {
 
 
 	@Override
-	public void setCells() {
+	public void regenerateCells() {
 		Cell[] cells = new Cell[4];
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 4; i++) {
@@ -44,7 +44,7 @@ public class LineBlock extends Block {
 			}
 			
 		}
-		mCells = cells;
+		this.setCells(cells);
 		
 		
 	}

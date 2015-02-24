@@ -13,7 +13,7 @@ public class LBlock extends Block {
 	public LBlock(GameBoard b) {
 		super(b);
 		setBlockType((byte) 3);
-		setCells();
+		regenerateCells();
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 1);
 		q.add((byte) 2);
@@ -24,7 +24,7 @@ public class LBlock extends Block {
 	}
 
 	@Override
-	public void setCells() {
+	public void regenerateCells() {
 		Cell[] cells = new Cell[4];
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 3; i++) {
@@ -55,7 +55,7 @@ public class LBlock extends Block {
 			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1);
 		}
 		
-		mCells = cells;
+		this.setCells(cells);
 		
 	}
 	

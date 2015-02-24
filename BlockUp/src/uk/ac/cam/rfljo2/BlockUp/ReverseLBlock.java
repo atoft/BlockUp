@@ -13,7 +13,7 @@ public class ReverseLBlock extends Block {
 	public ReverseLBlock(GameBoard b) {
 		super(b);
 		setBlockType((byte) 2);
-		setCells();
+		regenerateCells();
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 1);
 		q.add((byte) 2);
@@ -23,7 +23,7 @@ public class ReverseLBlock extends Block {
 	}
 	
 	@Override
-	public void setCells() {
+	public void regenerateCells() {
 		Cell[] cells = new Cell[4];
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 3; i++) {
@@ -54,7 +54,7 @@ public class ReverseLBlock extends Block {
 			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1);
 		}
 		
-		mCells = cells;
+		this.setCells(cells);
 		
 	}
 	

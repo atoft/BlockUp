@@ -29,7 +29,7 @@ public class GameManager {
 			
 			board.getActiveBlock().moveUp();
 			output.refreshScreen(board);
-			if (board.getActiveBlock().isPlaced()) spawnNextBlock();
+			if (board.getActiveBlock().isFinallyPlaced()) spawnNextBlock();
 		}
 	});
 	
@@ -53,7 +53,7 @@ public class GameManager {
 		board.getActiveBlock().moveUp();
 		playTimer.restart();
 		output.refreshScreen(board);
-		if (board.getActiveBlock().isPlaced()) spawnNextBlock();
+		if (board.getActiveBlock().isFinallyPlaced()) spawnNextBlock();
 		
 	}
 	

@@ -17,7 +17,7 @@ public class ReverseSquiggly extends Block {
 	public ReverseSquiggly(GameBoard b) {
 		super(b);
 		setBlockType((byte) 6);
-		setCells();
+		regenerateCells();
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 1);
 		q.add((byte) 0);
@@ -26,7 +26,7 @@ public class ReverseSquiggly extends Block {
 	
 	
 	@Override
-	public void setCells() {
+	public void regenerateCells() {
 		Cell[] cells = new Cell[4];
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 2; i++) {
@@ -45,7 +45,7 @@ public class ReverseSquiggly extends Block {
 			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1);
 		}
 		
-		mCells = cells;
+		this.setCells(cells);
 		
 	}
 

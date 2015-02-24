@@ -4,44 +4,27 @@ import java.util.Queue;
 
 /**
  * A representation of a block in the game.
+ * 
  * @author Robin Otter
  * @author Alastair Toft
  * @author Tom Read-Cutting
  */
 public abstract class Block {
-	
-	//Another change - and yet another
-	
-	
-	protected GameBoard mBoard; // Stores a reference to the board occupied by this block
-	
-	protected Cell[] mCells;
-	
-	private Queue<Byte> mRotationQueue;
-	
-	private Cell pivotPoint; // The point at which the block pivots / rotates
-	
-	private byte mBlockType;
-	
-	private boolean isPlaced;
-	
-	public byte getBlockType() {
-		return mBlockType;
-	}
 
-	public void setBlockType(byte BlockType) {
-		this.mBlockType = BlockType;
-	}
-	private boolean isHidden; // Holds whether this block is hidden on the GameBoard
-	
-	/**
-	 * Holds the state of rotation
-	 * 0 = ground state (Horizontal)
-	 * 1 = rotated 90* Clockwise
-	 * 2 = rotated 180* (Only for L Block and T Block)
-	 * 3 = rotated 270* (Only for L Block and T Block)
-	 */
+	private GameBoard mBoard; // Stores a reference to the board occupied by
+								// this block
+	private Cell[] mCells; // Cells belonging to that block
+
+	private Queue<Byte> mRotationQueue; // The Q holding the next rotation state
+
+	private Cell mPivotPoint; // The point at which the block pivots / rotates
+
+	private byte mBlockType;
+
+	private boolean isFinallyPlaced;
+
 	private byte rotationState;
+
 	
 	
 	/**
@@ -49,14 +32,123 @@ public abstract class Block {
 	 * @param b a reference to a GameBoard to place the block on
 	 */
 	protected Block(GameBoard b) {
-		isHidden = true; // Block is hidden by default until it is placed
-		pivotPoint = new Cell(-10,-10); // pivotpoint set to an arbitrary value
+		mPivotPoint = new Cell(-10, -10); // PivotPoint set to an arbitrary
+											// value
 		rotationState = 0;
-		isPlaced = false;
+		isFinallyPlaced = false;
 		mBoard = b;
 		mCells = new Cell[4];
 	}
+
+	/**
+	 * Returns the array containing the Cells belonging to this block
+	 * 
+	 * @return an array of the Cells belonging to this block
+	 */
+	public Cell[] getCells() {
+		return mCells;
+	}
+
+	/**
+	 * Sets the cells belonging to this block to a copy of the given Array
+	 * @param cells an array containing the new cells that will belong to this block
+	 */
+	public void setCells(Cell[] cells) {
+		mCells = cells.clone();
+	}
 	
+	/**
+	 * Set a Queue containing the next rotationStates of the block
+	 * @param rotationStates a Queue of the next rotationStates of the block
+	 */
+	public void setRotationQueue(Queue<Byte> rotationStates) {
+		this.mRotationQueue = rotationStates;
+	}
+	
+	/**
+	 * Returns the new Cell at which this block currently pivots / rotates
+	 * @return the current pivotPoint of the cell
+	 */
+	public Cell getPivotPoint() {
+		return mPivotPoint;
+	}
+
+	/**
+	 * Sets the pivot point of this to the specified Cell
+	 * @param pivotPoint the Cell to set as the new pivotPoint of this
+	 */
+	public void setPivotPoint(Cell pivotPoint) {
+		this.mPivotPoint = pivotPoint;
+	}
+	
+	/**
+	 * Returns the type of block as a byte
+	 * @return the type of the block
+	 */
+	public byte getBlockType() {
+		return mBlockType;
+	}
+	
+	/**
+	 * Sets the BlockType of this to the specified value
+	 * @param blockType the value of the blockType to be set
+	 */
+	public void setBlockType(byte blockType) {
+		this.mBlockType = blockType;
+	}
+	
+	/**
+	 * Tests if the block has been finally placed
+	 * @return true if this block has been finally placed
+	 */
+	public boolean isFinallyPlaced() {
+		return isFinallyPlaced;
+	}
+
+	
+	/**
+	 * Regenerates the Cell Array associated with this block, based upon the current rotationState and pivotPoint
+	 */
+	public abstract void regenerateCells();
+
+	/**
+	 * Hides the block from the GameBoard
+	 */
+	public void hideBlock() {
+		for (Cell c : mCells) {
+			mBoard.setCell(c.getCol(), c.getRow(), (byte) 0);
+		}
+	}
+
+	/**
+	 * Shows the block on the GameBoard, based upon its current rotationState and pivotPoint
+	 */
+	public void showBlock() {
+		for (Cell c : mCells) {
+			mBoard.setCell(c.getCol(), c.getRow(), mBlockType);
+		}
+
+	}
+
+	/**
+	 * Returns the current state of rotation of this 
+	 * 0 = ground state (Horizontal) 
+	 * 1 = rotated 90* Clockwise 
+	 * 2 = rotated 180* (Only for L Block and T Block) 
+	 * 3 = rotated 270* (Only for L Block and T Block)
+	 */
+	public byte getRotationState() {
+		return rotationState;
+	}
+
+	/**
+	 * Sets the current state of rotation to the specified value
+	 * @param rotationState the new value of the rotationState of this block
+	 */
+	public void setRotationState(byte rotationState) {
+		this.rotationState = rotationState;
+	}
+
 	
 	/**
 	 * Place the block at the specified position on the GameBoard
@@ -66,20 +158,23 @@ public abstract class Block {
 	 * @throws InvalidArgException if the rotationState is not valid for the type of block
 	 * @return true if the block can be successfully placed without collision
 	 */
-	public boolean place(int col, int row, byte rotationState) throws InvalidArgException {
-		if (rotationState < 0 || rotationState > 3) throw new InvalidArgException();
+	public boolean place(int col, int row, byte rotationState)
+			throws InvalidArgException {
+		if (rotationState < 0 || rotationState > 3)
+			throw new InvalidArgException();
 		byte oldRotationState = getRotationState();
 		Cell oldPivotPoint = getPivotPoint();
 		Cell c = new Cell(col, row);
-		if (getPivotPoint() != null) hideBlock();
+		if (getPivotPoint() != null)
+			hideBlock();
 		setPivotPoint(c);
 		setRotationState(rotationState);
-		setCells();
+		regenerateCells();
 		for (Cell d : mCells) {
-			if (mBoard.getCell(d.getCol(), d.getRow()) != 0)  {
+			if (mBoard.getCell(d.getCol(), d.getRow()) != 0) {
 				setPivotPoint(oldPivotPoint);
 				setRotationState(oldRotationState);
-				setCells();
+				regenerateCells();
 				showBlock();
 				return false;
 			}
@@ -87,54 +182,7 @@ public abstract class Block {
 		this.showBlock();
 		return true;
 	}
-		
-	
 
-	
-	public Cell[] getCells() {
-		return mCells;
-	}
-
-
-
-
-	public abstract void setCells();
-
-
-
-
-	public void hideBlock() {
-			for (Cell c: mCells) {
-				mBoard.setCell(c.getCol(),c.getRow(),(byte) 0);
-			}
-			this.setHidden(true);
-	}
-	
-	public void showBlock() {
-		for (Cell c: mCells) {
-			mBoard.setCell(c.getCol(),c.getRow(),mBlockType);
-		}
-		this.setHidden(false);
-		
-	}
-	
-	public Cell getPivotPoint() {
-		return pivotPoint;
-	}
-
-	public void setPivotPoint(Cell pivotPoint) {
-		this.pivotPoint = pivotPoint;
-	}
-
-	public byte getRotationState() {
-		return rotationState;
-	}
-
-	public void setRotationState(byte rotationState) {
-		this.rotationState = rotationState;
-	}
-
-	
 	/**
 	 * Rotates the block clockwise by 90*, increasing its rotation state by 1
 	 *
@@ -142,78 +190,65 @@ public abstract class Block {
 	public void rotate() {
 		byte b = mRotationQueue.poll();
 		try {
-			this.place(getPivotPoint().getCol(), getPivotPoint().getRow(),b); // Try to place the block rotated 90*
+			// try to place the block rotated 90* clockwise
+			this.place(getPivotPoint().getCol(), getPivotPoint().getRow(), b); 
 			mRotationQueue.add(b);
 		} catch (InvalidArgException e) {
-			showBlock(); // Show the block in its original position if the move fails
+			showBlock(); // Show the block in its original position if the move
+							// fails
 			mRotationQueue.add(b);
 		}
 	}
-	
-	
-	public void setRotationQueue(Queue<Byte> mRotationStates) {
-		this.mRotationQueue = mRotationStates;
-	}
 
 	/**
-	 * Attempts to move the block left one unit. If this raises an exception then the block remains in its original position
+	 * Attempts to move the block left one unit. If this fails
+	 * then the block remains in its original position
 	 */
 	public void moveLeft() {
 		try {
-			this.place(getPivotPoint().getCol() - 1, getPivotPoint().getRow(),getRotationState()); // Try to place the block one unit to the left
+			this.place(getPivotPoint().getCol() - 1, getPivotPoint().getRow(),
+					getRotationState()); // Try to place the block one unit to
+											// the left
 		} catch (InvalidArgException e) {
-			showBlock(); // Show the block in its original position if the move fails
+			showBlock(); // Show the block in its original position if the move
+							// fails
 		}
 	}
-	
+
 	/**
-	 * Moves the block right one space, if allowed
+	 * Attempts to move the block right one unit. If this fails
+	 * then the block remains in its original position
 	 */
 	public void moveRight() {
 		try {
-			this.place(getPivotPoint().getCol() + 1, getPivotPoint().getRow(), getRotationState()); // Try to place the block one unit to the right
+			this.place(getPivotPoint().getCol() + 1, getPivotPoint().getRow(),
+					getRotationState()); // Try to place the block one unit to
+											// the right
 		} catch (InvalidArgException e) {
 
-			showBlock(); // Show the block in its original position if the move fails
+			showBlock(); // Show the block in its original position if the move
+							// fails
 		}
 	}
-	
+
 	/**
-	 * Moves the block down one space, if allowed
+	 * Attempts to move the block up one unit. If this fails
+	 * then the block remains in its original position and it is
+	 * set to be finallyPlaced.
 	 */
 	public void moveUp() {
 		try {
-			boolean b = this.place(getPivotPoint().getCol(), getPivotPoint().getRow() - 1, getRotationState()); // Try to place the block one unit up
-			if (b == false) isPlaced = true; // If an up move fails, the block is placed there
+			// Try to place the block one unit up
+			boolean b = this.place(getPivotPoint().getCol(), getPivotPoint()
+					.getRow() - 1, getRotationState()); 
+			if (b == false)
+				isFinallyPlaced = true; // If an up move fails, the block is
+										// finallyPlaced
 		} catch (InvalidArgException e) {
-			showBlock(); // Show the block in its original position if the move fails
-			
+			showBlock(); // Show the block in its original position if the move
+							// fails
+
 		}
 	}
-	/**
-	 * Tests if the block is hidden
-	 * @return true if the block is hidden on the GameBoard
-	 */
-	public boolean isHidden() {
-		return isHidden;
-	}
-	/**
-	 * Set the hidden status of the block
-	 * @param isHidden true to set the block as hidden
-	 */
-	public void setHidden(boolean isHidden) {
-		this.isHidden = isHidden;
-	}
-
-	/**
-	 * @return the isPlaced
-	 */
-	public boolean isPlaced() {
-		return isPlaced;
-	}
-
-
-	
-	
 
 }

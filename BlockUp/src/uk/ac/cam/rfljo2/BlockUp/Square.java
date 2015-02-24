@@ -11,11 +11,11 @@ public class Square extends Block {
 	public Square(GameBoard b) {
 		super(b);
 		setBlockType((byte) 4);
-		setCells();
+		regenerateCells();
 	}
 
 	@Override
-	public void setCells() {
+	public void regenerateCells() {
 		Cell[] cells = new Cell[4];
 			for (int i = 0; i < 2; i++) {
 				Cell c = new Cell(getPivotPoint().getCol() + i,getPivotPoint().getRow());
@@ -24,7 +24,7 @@ public class Square extends Block {
 				cells[i+2] = d;
 			}
 
-		mCells = cells;
+		this.setCells(cells);
 		
 	}	
 	
