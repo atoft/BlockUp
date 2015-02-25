@@ -25,6 +25,7 @@ public class GameManager {
 	private int timeDelay = 500;
 	public GameUI output;
 	private GameBoard board;
+	private boolean isPaused;
 	
 	private Timer playTimer = new Timer(timeDelay, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -107,13 +108,20 @@ public class GameManager {
 		}
 		
 	}
-	public static void main(String[] args){
-		
-		GameUI gui = new GameUI();
-		gui.setVisible(true);
-		
-		
+
+	public void pause(){
+		if(!isPaused){
+			playTimer.stop();
+			isPaused = true;
+			output.setViewPaused(true);
+		}
+		else{
+			playTimer.start();
+			isPaused = false;
+			output.setViewPaused(false);
+		}
 	}
+	
 	
 	/**
 	 * Method which returns the control listener.
@@ -126,8 +134,10 @@ public class GameManager {
 
 			@Override
 			public void rotateBlockLeft() {
-				board.getActiveBlock().rotateLeft();
-				output.refreshScreen(board);
+				if(!isPaused){
+					board.getActiveBlock().rotateLeft();
+					output.refreshScreen(board);
+				}
 			}
 
 			@Override
@@ -137,14 +147,18 @@ public class GameManager {
 
 			@Override
 			public void moveBlockLeft() {
-				board.getActiveBlock().moveLeft();
-				output.refreshScreen(board);
+				if(!isPaused){
+					board.getActiveBlock().moveLeft();
+					output.refreshScreen(board);
+				}
 			}
 
 			@Override
 			public void moveBlockRight() {
-				board.getActiveBlock().moveRight();
-				output.refreshScreen(board);
+				if(!isPaused){
+					board.getActiveBlock().moveRight();
+					output.refreshScreen(board);
+				}
 			}
 
 			@Override
@@ -155,10 +169,12 @@ public class GameManager {
 
 			@Override
 			public void speedUpBlock() {
-				board.getActiveBlock().moveUp();
-				playTimer.restart();
-				output.refreshScreen(board);
-				placementCheck();
+				if(!isPaused){
+					board.getActiveBlock().moveUp();
+					playTimer.restart();
+					output.refreshScreen(board);
+					placementCheck();
+				}
 			}
 
 			@Override
@@ -169,8 +185,8 @@ public class GameManager {
 
 			@Override
 			public void pauseGame() {
-				// TODO Auto-generated method stub
 				
+				pause();
 			}
 
 			@Override
@@ -211,4 +227,15 @@ public class GameManager {
 		};
 	}
 	
+	/**
+	 * This is the main method for the whole package
+	 * @param args Takes no arguments
+	 */
+	public static void main(String[] args){
+		GameUI gui = new GameUI();
+		gui.setVisible(true);
+		
+		
+	}
+		
 }

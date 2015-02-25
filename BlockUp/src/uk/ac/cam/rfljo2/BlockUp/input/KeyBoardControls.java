@@ -21,6 +21,7 @@ public class KeyBoardControls extends ControlObserver {
 		test.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "up");
 		test.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "left");
 		test.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "right");
+		test.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_P,0), "pause");
 	}
 
 	@Override
@@ -53,6 +54,12 @@ public class KeyBoardControls extends ControlObserver {
 	    	public void actionPerformed(ActionEvent event){
 	    		mCL.navigateRight();
 	    		mCL.moveBlockRight();
+	    	}
+	    });
+		
+		test.getActionMap().put("pause", new AbstractAction(){
+	    	public void actionPerformed(ActionEvent event){
+	    		mCL.pauseGame();
 	    	}
 	    });
 	}

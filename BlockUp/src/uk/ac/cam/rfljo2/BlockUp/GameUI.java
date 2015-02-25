@@ -27,6 +27,7 @@ public class GameUI extends JFrame{
 	
 	public GameViewScreen viewScreen;
 	public GameNextScreen nextBlockScreen;
+	private JButton pauseButton;
 	private static GameManager gameManager;
 	
 	
@@ -74,6 +75,10 @@ public class GameUI extends JFrame{
 		addBorder(optionPanel, Strings.GUI_OPTIONS_LABEL);
 		sidePanel.add(optionPanel);
 		
+		pauseButton = new JButton(Strings.GUI_OPTIONS_PAUSE);
+		optionPanel.add(pauseButton);
+		
+		
 		//the code which implements the keyboard controls using the listener
 		//a bit hacky atm but works so good point to commit as I have to go now so can't finish it :(
 		//can't rotate anymore
@@ -94,9 +99,33 @@ public class GameUI extends JFrame{
 		viewScreen.updateView(currentBoard);
 	}
 	
-	
+	/**
+	 * Updates the appearance of the GUI to reflect the paused/unpaused state of the game.
+	 * @param p The paused state to set (true = paused)
+	 */
+	public void setViewPaused(boolean p){
+		if(p){
+			pauseButton.setText(Strings.GUI_OPTIONS_RESUME);
+		}
+		else{
+			pauseButton.setText(Strings.GUI_OPTIONS_PAUSE);
+		}
+	}
 	
 	/**
+	 * Displays a Game Over window
+	 * 
+	 * TODO: Do stuff
+	 */
+	public void showGameOver(){
+		Object[] options = {Strings.GUI_GAMEOVER_RESTART,Strings.GUI_GAMEOVER_QUIT};
+		int n = JOptionPane.showOptionDialog(this, Strings.GUI_GAMEOVER_MESSAGE, 
+				Strings.GUI_GAMEOVER_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+	}
+	
+	/**
+	 * 
+	 * TODO: Remove this once the next block screen has been improved
 	 * Calls the update method of the GameNextScreen object in order to display
 	 * the next block to be made.
 	 * 
