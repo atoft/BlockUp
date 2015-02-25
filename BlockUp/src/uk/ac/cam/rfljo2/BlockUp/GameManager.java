@@ -66,7 +66,6 @@ public class GameManager {
 	public Block generateBlock(GameBoard board){
 		Random blockGen = new Random();
 		int nextBlock = blockGen.nextInt(7);
-		System.out.println(nextBlock);
 		Block result;
 		switch(nextBlock){
 			case 0:		result = new LineBlock(board);

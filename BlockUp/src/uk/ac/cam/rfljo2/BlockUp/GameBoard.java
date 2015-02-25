@@ -39,6 +39,7 @@ public class GameBoard {
 			if (r.isFull()) { fullCheck = true; break; }
 		}
 		if(!fullCheck) return;
+		
 		Row[] newArray = new Row[20];
 		int index = 0;
 		for(Row r : mRows){
@@ -46,11 +47,11 @@ public class GameBoard {
 				newArray[index] = r;
 				index++;
 			}
-			for(int j = index; j<20;j++){
-				newArray[index]=new Row(10);
-			}
-			mRows = newArray;
 		}
+		for(int j = index; j<20;j++){
+			newArray[j]=new Row(10);	
+		}
+		mRows = newArray;
 	}
 	
 	
