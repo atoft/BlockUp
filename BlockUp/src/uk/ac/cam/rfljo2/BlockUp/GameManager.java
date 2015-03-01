@@ -1,6 +1,7 @@
 package uk.ac.cam.rfljo2.BlockUp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -43,7 +44,15 @@ public class GameManager {
 	 */
 	private void placementCheck(){
 		if (board.getActiveBlock().isFinallyPlaced()){ 
-			board.clearFullRows();
+			List clearedRows = board.clearFullRows();
+			if(clearedRows!=null){
+				output.viewScreen.flashBlocks(board, clearedRows);
+				/*
+				 * An initial attempt at displaying a flashing animation when the rows are cleared.
+				 * Doesn't behave properly because the game continues while the animation is
+				 * playing. TODO: Need a way to stop pause execution until the animation is done.
+				 */
+			}
 			spawnNextBlock();
 			
 		}
