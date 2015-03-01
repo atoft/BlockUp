@@ -61,6 +61,7 @@ public class Row {
 		for (int i = 0; i < mArray.length; i++) {
 			mArray[i] = 0;
 		}
+		mOccupiedCount=0;
 		
 	}
 	
