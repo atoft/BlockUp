@@ -65,8 +65,14 @@ public class GameViewScreen extends JPanel{
 							break;
 						case 6: blockColour = java.awt.Color.magenta;
 							break;
-						default : blockColour = java.awt.Color.red;
+						case 7 : blockColour = java.awt.Color.red;
 							break;
+						case 8 : blockColour = java.awt.Color.pink;
+							break;
+						default : blockColour = java.awt.Color.black;
+							break;
+							
+							
 					}
 					g.setColor(blockColour);
 					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);

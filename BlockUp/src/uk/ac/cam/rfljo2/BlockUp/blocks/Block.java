@@ -2,6 +2,7 @@ package uk.ac.cam.rfljo2.BlockUp.blocks;
 import uk.ac.cam.rfljo2.BlockUp.*;
 
 import java.util.Queue;
+import java.util.Random;
 
 /**
  * A representation of a block in the game.
@@ -131,7 +132,7 @@ public abstract class Block {
 	 */
 	public void showBlock() {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(), mBlockType);
+			mBoard.setCell(c.getCol(), c.getRow(),c.getType());
 		}
 
 	}
@@ -255,6 +256,13 @@ public abstract class Block {
 							// fails
 
 		}
+	}
+	
+	public void makePowerBlock() {
+		Random r = new Random();
+		int i = r.nextInt(4);
+		mCells[i].setType((byte)8);
+		
 	}
 
 }

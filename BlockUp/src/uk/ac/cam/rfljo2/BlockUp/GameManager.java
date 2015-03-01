@@ -93,6 +93,7 @@ public class GameManager {
 			default:	result = new ReverseSquiggly(board);
 		}
 		output.refreshBlock(nextBlock+1);
+		result.makePowerBlock();
 		return result;
 	}
 	/**
