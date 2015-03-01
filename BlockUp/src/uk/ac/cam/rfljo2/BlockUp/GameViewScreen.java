@@ -2,6 +2,10 @@ package uk.ac.cam.rfljo2.BlockUp;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -18,7 +22,15 @@ public class GameViewScreen extends JPanel{
 	private int mBoardHeight = 20;
 	private int mCellSize = 30;
 	
+	private int flashDelay = 100;
+	private int numFlashes = 5;
+	
 	private GameBoard mCurrentBoard;
+	
+	private boolean doneFlashing;
+	private boolean flashState;
+	List<Integer> flashRows;
+	
 	
 	
 	@Override
@@ -70,17 +82,42 @@ public class GameViewScreen extends JPanel{
 		for(int y=0;y<(mBoardHeight);y++){
 			g.drawLine(0,mCellSize*y,width,mCellSize*y);
 		}
+		
+		//Flash rows
+		if(flashState){
+			for(int i : flashRows){
+				g.setColor(java.awt.Color.white);
+				g.fillRect(0,i*mCellSize,width,mCellSize);
+			}
+		}
 	}
 
 	
 	/**
 	 * Given the new version of the game grid, refreshes the displayed view.
-	 * @Question How will the currently falling block be passed to this method?
 	 * 
 	 * @param currentBoard The board to display
 	 */
 	public void updateView(GameBoard currentBoard){
 		mCurrentBoard = currentBoard;
 		repaint();
+	}
+	public void flashBlocks(GameBoard currentBoard, List<Integer>toFlash){
+		flashRows = toFlash;
+		mCurrentBoard = currentBoard;
+		Timer flashTimer = new Timer(flashDelay, new ActionListener() {
+			int rep = 0;
+			public void actionPerformed(ActionEvent e) {
+				if(rep > numFlashes){
+					doneFlashing=true;
+					return;
+				}
+				if(!flashState) flashState = true;
+				else flashState = false;
+				repaint();
+				rep++;
+			}
+		});
+		flashTimer.start();
 	}
 }

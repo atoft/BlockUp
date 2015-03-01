@@ -1,5 +1,9 @@
 package uk.ac.cam.rfljo2.BlockUp;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import uk.ac.cam.rfljo2.BlockUp.blocks.*;
 
 /**
@@ -33,25 +37,29 @@ public class GameBoard {
 	 * and replaces the original array.
 	 * 
 	 */
-	public void clearFullRows() {
+	public LinkedList<Integer> clearFullRows() {
 		boolean fullCheck = false;
 		for(Row r : mRows){
 			if (r.isFull()) { fullCheck = true; break; }
 		}
-		if(!fullCheck) return;
+		if(!fullCheck) return null;
 		
 		Row[] newArray = new Row[20];
+		LinkedList<Integer> removed = new LinkedList<Integer>();
 		int index = 0;
 		for(Row r : mRows){
 			if(!r.isFull()){
 				newArray[index] = r;
 				index++;
 			}
+			else removed.add(index);
 		}
 		for(int j = index; j<20;j++){
 			newArray[j]=new Row(10);	
 		}
 		mRows = newArray;
+		
+		return removed;
 	}
 	
 	/**
