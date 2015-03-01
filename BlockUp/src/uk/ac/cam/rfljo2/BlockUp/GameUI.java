@@ -113,14 +113,22 @@ public class GameUI extends JFrame{
 	}
 	
 	/**
-	 * Displays a Game Over window
-	 * 
-	 * TODO: Do stuff
+	 * Displays a Game Over window which provides options to restart
+	 * or quit the game
 	 */
 	public void showGameOver(){
 		Object[] options = {Strings.GUI_GAMEOVER_RESTART,Strings.GUI_GAMEOVER_QUIT};
 		int n = JOptionPane.showOptionDialog(this, Strings.GUI_GAMEOVER_MESSAGE, 
 				Strings.GUI_GAMEOVER_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+		//TODO: Display scores
+		if(n==0){
+			//TODO: Not happy with UI referencing GameManager and vice versa like this
+			gameManager.restartGame();
+			System.out.println("restart the game");
+		}
+		else{
+			this.dispose();
+		}
 	}
 	
 	/**

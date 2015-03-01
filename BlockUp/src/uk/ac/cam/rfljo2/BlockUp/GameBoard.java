@@ -33,7 +33,7 @@ public class GameBoard {
 	 * and replaces the original array.
 	 * 
 	 */
-	public void clearRows() {
+	public void clearFullRows() {
 		boolean fullCheck = false;
 		for(Row r : mRows){
 			if (r.isFull()) { fullCheck = true; break; }
@@ -52,6 +52,15 @@ public class GameBoard {
 			newArray[j]=new Row(10);	
 		}
 		mRows = newArray;
+	}
+	
+	/**
+	 * Empties the contents of every row in the board.
+	 */
+	public void clearAllRows() {
+		for(Row r : mRows){
+			r.clear();
+		}
 	}
 	
 	

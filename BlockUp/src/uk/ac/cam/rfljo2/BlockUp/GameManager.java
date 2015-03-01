@@ -43,7 +43,7 @@ public class GameManager {
 	 */
 	private void placementCheck(){
 		if (board.getActiveBlock().isFinallyPlaced()){ 
-			board.clearRows();
+			board.clearFullRows();
 			spawnNextBlock();
 			
 		}
@@ -101,7 +101,10 @@ public class GameManager {
 		}
 		try {
 			if (board.getActiveBlock().getBlockType() == 3) board.getActiveBlock().place(4, 18, (byte)0);
-			else board.getActiveBlock().place(4, 19, (byte)0);
+			else{ 
+				boolean success = board.getActiveBlock().place(4, 19, (byte)0);
+				if(!success) gameOver();
+			}
 		} catch (InvalidArgException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,6 +112,9 @@ public class GameManager {
 		
 	}
 
+	/**
+	 * If the game is running, pauses the game. If it is paused, resumes the game.
+	 */
 	public void pause(){
 		if(!isPaused){
 			playTimer.stop();
@@ -122,6 +128,23 @@ public class GameManager {
 		}
 	}
 	
+	/**
+	 * Freezes the game and calls the UI's game over display.
+	 */
+	public void gameOver(){
+		pause();
+		output.showGameOver();
+	}
+	
+	public void restartGame(){
+		//TODO: Reset scores
+		board.clearAllRows();
+		playTimer.restart();
+		output.refreshScreen(board);
+		if(isPaused){
+			pause();
+		}
+	}
 	
 	/**
 	 * Method which returns the control listener.
