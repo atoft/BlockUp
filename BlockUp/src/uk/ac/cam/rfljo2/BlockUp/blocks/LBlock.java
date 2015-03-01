@@ -35,14 +35,14 @@ public class LBlock extends Block {
 		}
 		if (getRotationState() == 1) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i,cells[i].getType());
 				cells[i] = c;
 			}
 			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
 		}
 		if (getRotationState() == 2) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(),cells[i].getType());
+				Cell c = new Cell(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType());
 				cells[i] = c;
 			}
 			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType());
