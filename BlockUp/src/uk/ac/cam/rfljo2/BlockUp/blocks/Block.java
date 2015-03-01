@@ -32,13 +32,18 @@ public abstract class Block {
 	 * Constructs a new block, given a reference to a GameBoard to place it on
 	 * @param b a reference to a GameBoard to place the block on
 	 */
-	protected Block(GameBoard b) {
-		mPivotPoint = new Cell(-10, -10); // PivotPoint set to an arbitrary
-											// value
+	protected Block(GameBoard b, byte type) {
+		mBlockType = type;
 		rotationState = 0;
 		isFinallyPlaced = false;
 		mBoard = b;
 		mCells = new Cell[4];
+		for (int i = 0; i < mCells.length; i++) {
+			mCells[i] = new Cell(-10, -10,getBlockType());
+		}
+		setPivotPoint(new Cell(-10, -10,getBlockType())); // PivotPoint set to an arbitrary
+		// value
+		regenerateCells();
 	}
 
 	/**
@@ -165,7 +170,7 @@ public abstract class Block {
 			throw new InvalidArgException();
 		byte oldRotationState = getRotationState();
 		Cell oldPivotPoint = getPivotPoint();
-		Cell c = new Cell(col, row);
+		Cell c = new Cell(col, row, mBlockType);
 		if (getPivotPoint() != null)
 			hideBlock();
 		setPivotPoint(c);
