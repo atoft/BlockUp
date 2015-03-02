@@ -11,6 +11,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.Timer;
 
+import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
 import uk.ac.cam.rfljo2.BlockUp.input.ControlListener;
 import uk.ac.cam.rfljo2.BlockUp.input.KeyBoardControls;
 
@@ -139,8 +140,8 @@ public class GameUI extends JFrame{
 	 * 
 	 * @param id The integer corresponding to this block
 	 */	
-	public void refreshBlock(int id){
-		nextBlockScreen.updateNext(id);
+	public void refreshBlock(Block next, GameBoard nextBoard){
+		nextBlockScreen.updateNext(next, nextBoard);
 	}
 	
 	/**

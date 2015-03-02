@@ -77,23 +77,34 @@ public class GameManager {
 		Random blockGen = new Random();
 		int nextBlock = blockGen.nextInt(7);
 		Block result;
+		Block resultClone;
+		GameBoard nextBoard = new GameBoard(4,4);
 		switch(nextBlock){
 			case 0:		result = new LineBlock(board);
+						resultClone = new LineBlock(nextBoard);
 				break;
 			case 1:		result = new ReverseLBlock(board);
+						resultClone = new ReverseLBlock(nextBoard);
 				break;
 			case 2:		result = new LBlock(board);
+						resultClone = new LBlock(nextBoard);
 				break;
 			case 3:		result = new Square(board);
+						resultClone = new Square(nextBoard);
 				break;
 			case 4:		result = new Squiggly(board);
+						resultClone = new Squiggly(nextBoard);
 				break;
 			case 5:		result = new TBlock(board);
+						resultClone = new TBlock(nextBoard);
 				break;
 			default:	result = new ReverseSquiggly(board);
+						resultClone = new ReverseSquiggly(nextBoard);
 		}
-		output.refreshBlock(nextBlock+1);
+		
 		result.makePowerBlock();
+		resultClone.makePowerBlock();
+		output.refreshBlock(resultClone,nextBoard);
 		return result;
 	}
 	/**

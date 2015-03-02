@@ -51,6 +51,10 @@ public abstract class Block {
 		regenerateCells();
 	}
 
+	
+	public void setGameBoard(GameBoard b) {
+		mBoard = b;
+	}
 	/**
 	 * Returns the array containing the Cells belonging to this block
 	 * 
