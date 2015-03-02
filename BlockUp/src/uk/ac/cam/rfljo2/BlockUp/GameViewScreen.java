@@ -51,30 +51,7 @@ public class GameViewScreen extends JPanel{
 		for(int row=0; row<mBoardHeight;row++){//Loop over all cells in the board array
 			for(int col=0; col<mBoardWidth;col++){
 				if(mCurrentBoard.getCell(col,row)!=0){
-					Color blockColour;
-					switch(mCurrentBoard.getCell(col, row)){		//Colours of blocks are defined here
-						case 1: blockColour = java.awt.Color.cyan;
-							break;
-						case 2: blockColour = java.awt.Color.blue;
-							break;
-						case 3: blockColour = java.awt.Color.orange;
-							break;
-						case 4: blockColour = java.awt.Color.yellow;
-							break;
-						case 5: blockColour = java.awt.Color.green;
-							break;
-						case 6: blockColour = java.awt.Color.magenta;
-							break;
-						case 7 : blockColour = java.awt.Color.red;
-							break;
-						case 8 : blockColour = java.awt.Color.pink;
-							break;
-						default : blockColour = java.awt.Color.black;
-							break;
-							
-							
-					}
-					g.setColor(blockColour);
+					g.setColor(mCurrentBoard.getColour(col, row));
 					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);
 				}
 			}

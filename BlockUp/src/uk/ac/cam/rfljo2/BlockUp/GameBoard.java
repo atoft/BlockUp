@@ -1,5 +1,6 @@
 package uk.ac.cam.rfljo2.BlockUp;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -78,10 +79,10 @@ public class GameBoard {
 	 * @param row the row in which to place the value
 	 * @param value the value to store in the GameBoard
 	 */
-	public void setCell(int col, int row, byte value) {
+	public void setCell(int col, int row, byte value, Color colour) {
 		if (row > mRows.length - 1 || row < 0) return;
 		if (col > mRows[0].length() - 1 || col < 0) return;
-		mRows[row].setCell(col, value);
+		mRows[row].setCell(col, value, colour);
 	}
 	
 	/**
@@ -94,6 +95,18 @@ public class GameBoard {
 		if (row > mRows.length - 1 || row < 0) return -1; 
 		if (col > mRows[0].length() - 1 || col < 0) return -1;
 		return mRows[row].getCell(col);
+	}
+	
+	/**
+	 * Returns the color value at the specified row and column
+	 * @param col the column of the cell in question
+	 * @param row the row of the cell in question
+	 * @return the color contained in the specified cell
+	 */
+	public Color getColour(int col, int row) {
+		if (row > mRows.length - 1 || row < 0) return Color.black; 
+		if (col > mRows[0].length() - 1 || col < 0) return Color.black;
+		return mRows[row].getColour(col);
 	}
 
 	

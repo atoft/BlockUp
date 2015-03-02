@@ -1,4 +1,7 @@
 package uk.ac.cam.rfljo2.BlockUp;
+
+import java.awt.Color;
+
 /**
  * Holds a pair containing a column and a row value
  */
@@ -7,6 +10,7 @@ public class Cell {
 	private final int mCol;
 	private final int mRow;
 	private byte mType;
+	private Color mColour;
 	
 	
 	/**
@@ -24,10 +28,11 @@ public class Cell {
 	 * 6 - Purple T Block
 	 * 7 - Red Reverse Squiggly
 	 */
-	public Cell(int column, int row, byte type) {
+	public Cell(int column, int row, byte type, Color colour) {
 		mCol = column;
 		mRow = row;
 		mType = type;
+		mColour = colour;
 	}
 	
 	/**
@@ -64,6 +69,14 @@ public class Cell {
 	 */
 	public boolean equals(Cell c) {
 		return (c.mCol == this.mCol && c.mRow == this.mRow);
+	}
+
+	public Color getColour() {
+		return mColour;
+	}
+	
+	public void setColour(Color colour) {
+		mColour = colour;
 	}
 
 

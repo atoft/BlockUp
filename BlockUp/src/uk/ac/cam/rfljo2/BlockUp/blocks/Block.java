@@ -1,6 +1,7 @@
 package uk.ac.cam.rfljo2.BlockUp.blocks;
 import uk.ac.cam.rfljo2.BlockUp.*;
 
+import java.awt.Color;
 import java.util.Queue;
 import java.util.Random;
 
@@ -26,6 +27,8 @@ public abstract class Block {
 	private boolean isFinallyPlaced;
 
 	private byte rotationState;
+	
+	private Color mColour;
 
 	
 	
@@ -33,16 +36,17 @@ public abstract class Block {
 	 * Constructs a new block, given a reference to a GameBoard to place it on
 	 * @param b a reference to a GameBoard to place the block on
 	 */
-	protected Block(GameBoard b, byte type) {
+	protected Block(GameBoard b, byte type, Color colour) {
 		mBlockType = type;
+		mColour = colour;
 		rotationState = 0;
 		isFinallyPlaced = false;
 		mBoard = b;
 		mCells = new Cell[4];
 		for (int i = 0; i < mCells.length; i++) {
-			mCells[i] = new Cell(-10, -10,getBlockType());
+			mCells[i] = new Cell(-10, -10,getBlockType(), getColour());
 		}
-		setPivotPoint(new Cell(-10, -10,getBlockType())); // PivotPoint set to an arbitrary
+		setPivotPoint(new Cell(-10, -10,getBlockType(),getColour())); // PivotPoint set to an arbitrary
 		// value
 		regenerateCells();
 	}
@@ -123,7 +127,7 @@ public abstract class Block {
 	 */
 	public void hideBlock() {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(), (byte) 0);
+			mBoard.setCell(c.getCol(), c.getRow(), (byte) 0, Color.black);
 		}
 	}
 
@@ -132,7 +136,7 @@ public abstract class Block {
 	 */
 	public void showBlock() {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(),c.getType());
+			mBoard.setCell(c.getCol(), c.getRow(),c.getType(), c.getColour());
 		}
 
 	}
@@ -171,7 +175,7 @@ public abstract class Block {
 			throw new InvalidArgException();
 		byte oldRotationState = getRotationState();
 		Cell oldPivotPoint = getPivotPoint();
-		Cell c = new Cell(col, row, mBlockType);
+		Cell c = new Cell(col, row, mBlockType,Color.black);
 		if (getPivotPoint() != null)
 			hideBlock();
 		setPivotPoint(c);
@@ -263,7 +267,22 @@ public abstract class Block {
 		Random r = new Random();
 		int i = r.nextInt(4);
 		mCells[i].setType((byte)8);
+		mCells[i].setColour(Color.pink);
 		
+	}
+
+	/**
+	 * @return the mColour
+	 */
+	public Color getColour() {
+		return mColour;
+	}
+
+	/**
+	 * @param mColour the mColour to set
+	 */
+	public void setColour(Color mColour) {
+		this.mColour = mColour;
 	}
 
 }

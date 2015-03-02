@@ -1,6 +1,7 @@
 package uk.ac.cam.rfljo2.BlockUp.blocks;
 import uk.ac.cam.rfljo2.BlockUp.*;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,7 +13,7 @@ public class ReverseLBlock extends Block {
 
 	
 	public ReverseLBlock(GameBoard b) {
-		super(b,(byte) 2);
+		super(b,(byte) 2,Color.blue);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);
@@ -26,31 +27,31 @@ public class ReverseLBlock extends Block {
 		Cell[] cells = this.getCells();
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(),cells[i].getType());
+				Cell c = new Cell(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(),cells[i].getType(),cells[i].getColour());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType(),cells[3].getColour());
 		}
 		if (getRotationState() == 1) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i,cells[i].getType());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i,cells[i].getType(),cells[i].getColour());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType(),cells[3].getColour());
 		}
 		if (getRotationState() == 2) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType());
+				Cell c = new Cell(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType(),cells[i].getColour());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType(),cells[3].getColour());
 		}
 		if (getRotationState() == 3) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType(),cells[i].getColour());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType(),cells[3].getColour());
 		}
 		
 		this.setCells(cells);
