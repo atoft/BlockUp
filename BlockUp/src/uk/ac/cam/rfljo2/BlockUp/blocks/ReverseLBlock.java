@@ -14,9 +14,9 @@ public class ReverseLBlock extends Block {
 	public ReverseLBlock(GameBoard b) {
 		super(b,(byte) 2);
 		Queue<Byte> q = new LinkedList<Byte>();
-		q.add((byte) 1);
-		q.add((byte) 2);
 		q.add((byte) 3);
+		q.add((byte) 2);
+		q.add((byte) 1);
 		q.add((byte) 0);
 		this.setRotationQueue(q);
 	}

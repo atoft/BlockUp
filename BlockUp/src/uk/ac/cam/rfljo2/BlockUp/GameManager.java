@@ -110,7 +110,7 @@ public class GameManager {
 			board.setNextBlock(generateBlock(board));
 		}
 		try {
-			if (board.getActiveBlock().getBlockType() == 3) board.getActiveBlock().place(4, 18, (byte)0);
+			if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
 			else{ 
 				boolean success = board.getActiveBlock().place(4, 19, (byte)0);
 				if(!success) gameOver();
@@ -168,7 +168,7 @@ public class GameManager {
 			@Override
 			public void rotateBlockLeft() {
 				if(!isPaused){
-					board.getActiveBlock().rotateLeft();
+					board.getActiveBlock().rotateClockwise();
 					output.refreshScreen(board);
 				}
 			}
