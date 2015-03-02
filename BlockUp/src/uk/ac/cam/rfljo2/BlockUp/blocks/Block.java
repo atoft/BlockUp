@@ -194,12 +194,13 @@ public abstract class Block {
 	 * Rotates the block clockwise by 90*, increasing its rotation state by 1
 	 *
 	 */
-	public void rotateLeft() {
-		byte b = mRotationQueue.poll();
+	public void rotateClockwise() {
+		byte b = mRotationQueue.peek();
 		try {
 			// try to place the block rotated 90* clockwise
 			this.place(getPivotPoint().getCol(), getPivotPoint().getRow(), b); 
 			mRotationQueue.add(b);
+			mRotationQueue.poll();
 		} catch (InvalidArgException e) {
 			showBlock(); // Show the block in its original position if the move
 							// fails
