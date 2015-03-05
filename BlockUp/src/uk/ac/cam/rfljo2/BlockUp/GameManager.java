@@ -44,7 +44,7 @@ public class GameManager {
 	 */
 	private void placementCheck(){
 		if (board.getActiveBlock().isFinallyPlaced()){ 
-			List clearedRows = board.clearFullRows();
+			List<Integer> clearedRows = board.clearFullRows();
 			if(clearedRows!=null){
 				output.viewScreen.flashBlocks(board, clearedRows);
 				/*
