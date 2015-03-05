@@ -21,32 +21,26 @@ public abstract class Block {
 	private Queue<Byte> mRotationQueue; // The Q holding the next rotation state
 
 	private Cell mPivotPoint; // The point at which the block pivots / rotates
-
-	private byte mBlockType;
-
+	
 	private boolean isFinallyPlaced;
 
 	private byte rotationState;
-	
-	private Color mColour;
 
 	
 	
 	/**
-	 * Constructs a new block, given a reference to a GameBoard to place it on
+	 * Constructs a new vanilla block. Setting all cells to a certain type.
 	 * @param b a reference to a GameBoard to place the block on
 	 */
-	protected Block(GameBoard b, byte type, Color colour) {
-		mBlockType = type;
-		mColour = colour;
+	protected Block(GameBoard b, byte type) {
 		rotationState = 0;
 		isFinallyPlaced = false;
 		mBoard = b;
 		mCells = new Cell[4];
 		for (int i = 0; i < mCells.length; i++) {
-			mCells[i] = new Cell(-10, -10,getBlockType(), getColour());
+			mCells[i] = new Cell(-10, -10, type);
 		}
-		setPivotPoint(new Cell(-10, -10,getBlockType(),getColour())); // PivotPoint set to an arbitrary
+		setPivotPoint(new Cell(-10, -10, type)); // PivotPoint set to an arbitrary
 		// value
 		regenerateCells();
 	}
@@ -97,22 +91,6 @@ public abstract class Block {
 	}
 	
 	/**
-	 * Returns the type of block as a byte
-	 * @return the type of the block
-	 */
-	public byte getBlockType() {
-		return mBlockType;
-	}
-	
-	/**
-	 * Sets the BlockType of this to the specified value
-	 * @param blockType the value of the blockType to be set
-	 */
-	public void setBlockType(byte blockType) {
-		this.mBlockType = blockType;
-	}
-	
-	/**
 	 * Tests if the block has been finally placed
 	 * @return true if this block has been finally placed
 	 */
@@ -131,7 +109,7 @@ public abstract class Block {
 	 */
 	public void hideBlock() {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(), (byte) 0, Color.black);
+			mBoard.setCell(c.getCol(), c.getRow(), (byte) 0);
 		}
 	}
 
@@ -140,7 +118,7 @@ public abstract class Block {
 	 */
 	public void showBlock() {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(),c.getType(), c.getColour());
+			mBoard.setCell(c.getCol(), c.getRow(),(byte) 0);
 		}
 
 	}
@@ -179,7 +157,7 @@ public abstract class Block {
 			throw new InvalidArgException();
 		byte oldRotationState = getRotationState();
 		Cell oldPivotPoint = getPivotPoint();
-		Cell c = new Cell(col, row, mBlockType,Color.black);
+		Cell c = new Cell(col, row,(byte) 0); //TODO: look at this
 		if (getPivotPoint() != null)
 			hideBlock();
 		setPivotPoint(c);
@@ -266,27 +244,4 @@ public abstract class Block {
 
 		}
 	}
-	
-	public void makePowerBlock() {
-		Random r = new Random();
-		int i = r.nextInt(4);
-		mCells[i].setType((byte)8);
-		mCells[i].setColour(Color.pink);
-		
-	}
-
-	/**
-	 * @return the mColour
-	 */
-	public Color getColour() {
-		return mColour;
-	}
-
-	/**
-	 * @param mColour the mColour to set
-	 */
-	public void setColour(Color mColour) {
-		this.mColour = mColour;
-	}
-
 }

@@ -1,7 +1,5 @@
 package uk.ac.cam.rfljo2.BlockUp;
 
-import java.awt.Color;
-
 
 /**A representation of a single row in the game grid. Allows for addition of
  * new blocks and testing whether the row is full.
@@ -11,16 +9,6 @@ import java.awt.Color;
 public class Row {
 	
 	private byte[] mArray;
-	private Color[] mColours;
-	/*
-	 * 1 = Turquoise Line
-	 * 2 = Blue Reverse L Block
-	 * 3 - Orange L Block
-	 * 4 - Yellow Square
-	 * 5 - Green Squiggly
-	 * 6 - Purple T Block
-	 * 7 - Red Reverse Squiggly
-	 */
 	
 	
 	private int mOccupiedCount; // Counts how many cells in the row are occupied
@@ -31,12 +19,11 @@ public class Row {
 	 * @param value the value to set the given position to
 	 * @param the colour to colour the specified cell
 	 */
-	public void setCell(int index, byte value, Color colour) {
+	public void setCell(int index, byte type) {
 		if (index > mArray.length - 1 || index < 0) return;
-		mArray[index] = value;
-		if(value==0) mOccupiedCount--;
+		mArray[index] = type;
+		if(type==0) mOccupiedCount--;
 		else mOccupiedCount++;
-		mColours[index] = colour;
 	}
 	
 	/**
@@ -50,17 +37,6 @@ public class Row {
 		
 	}
 	
-	/**
-	 * Returns the contents of the cell at given index
-	 * @param index the index of the cell whose contents is to be returned
-	 * @return the contents of the cell at index
-	 */
-	public Color getColour(int index) {
-		if (index > mArray.length - 1 || index < 0) return Color.black;
-		return mColours[index];
-		
-	}
-	
 	
 	
 	/**
@@ -69,10 +45,6 @@ public class Row {
 	 */
 	public Row(int cols) {
 		mArray = new byte[cols];
-		mColours = new Color[cols];
-		for (int i = 0; i < mColours.length; i++) {
-			mColours[i] = Color.black; // Set all cells to black
-		}
 		mOccupiedCount = 0;
 	}
 	
@@ -82,7 +54,6 @@ public class Row {
 	public void clear() {
 		for (int i = 0; i < mArray.length; i++) {
 			mArray[i] = 0;
-			mColours[i] = Color.black;
 		}
 		mOccupiedCount=0;
 		

@@ -17,7 +17,7 @@ public class ReverseSquiggly extends Block {
 	
 	
 	public ReverseSquiggly(GameBoard b) {
-		super(b,(byte) 6, Color.magenta);
+		super(b,BlockType.MAGENTA);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);
@@ -32,35 +32,35 @@ public class ReverseSquiggly extends Block {
 		Cell[] cells = this.getCells();
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 2; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - i,cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - i,cells[i].getType());
 				cells[i] = c;
 			}
-			cells[2] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow(),cells[2].getType(),cells[2].getColour());
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType(),cells[3].getColour());
+			cells[2] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow(),cells[2].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
 		}
 		if (getRotationState() == 1) {
 			for (int i = 0; i < 2; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() - i,getPivotPoint().getRow(),cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol() - i,getPivotPoint().getRow(),cells[i].getType());
 				cells[i] = c;
 			}
-			cells[2] = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1,cells[2].getType(),cells[2].getColour());
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType(),cells[3].getColour());
+			cells[2] = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1,cells[2].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType());
 		}
 		if (getRotationState() == 2) {
 			for (int i = 0; i < 2; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + i,cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + i,cells[i].getType());
 				cells[i] = c;
 			}
-			cells[2] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[2].getType(),cells[2].getColour());
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType(),cells[3].getColour());
+			cells[2] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[2].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType());
 		}
 		if (getRotationState() == 3) {
 			for (int i = 0; i < 2; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() + i,getPivotPoint().getRow(),cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol() + i,getPivotPoint().getRow(),cells[i].getType());
 				cells[i] = c;
 			}
-			cells[2] = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[2].getType(),cells[2].getColour());
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType(),cells[3].getColour());
+			cells[2] = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[2].getType());
+			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType());
 		}
 		
 		this.setCells(cells);

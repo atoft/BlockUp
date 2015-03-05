@@ -10,29 +10,12 @@ public class Cell {
 	private final int mCol;
 	private final int mRow;
 	private byte mType;
-	private Color mColour;
 	
 	
-	/**
-	 * Constructs a new cell with given row and column values
-	 * @param column	the value of the column to be stored in the cell
-	 * @param row		the value of the row to be stored in the cell
-	 * @param type the type of cell to construct
-	 * 
-	 * 0 = empty cell
-	 * 1 = Turquoise Line
-	 * 2 = Blue Reverse L Block
-	 * 3 - Orange L Block
-	 * 4 - Yellow Square
-	 * 5 - Green Squiggly
-	 * 6 - Purple T Block
-	 * 7 - Red Reverse Squiggly
-	 */
-	public Cell(int column, int row, byte type, Color colour) {
+	public Cell(int column, int row, byte type) {
 		mCol = column;
 		mRow = row;
 		mType = type;
-		mColour = colour;
 	}
 	
 	/**
@@ -70,15 +53,4 @@ public class Cell {
 	public boolean equals(Cell c) {
 		return (c.mCol == this.mCol && c.mRow == this.mRow);
 	}
-
-	public Color getColour() {
-		return mColour;
-	}
-	
-	public void setColour(Color colour) {
-		mColour = colour;
-	}
-
-
-
 }

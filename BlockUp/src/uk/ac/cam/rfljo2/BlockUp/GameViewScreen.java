@@ -51,7 +51,7 @@ public class GameViewScreen extends JPanel{
 		for(int row=0; row<mBoardHeight;row++){//Loop over all cells in the board array
 			for(int col=0; col<mBoardWidth;col++){
 				if(mCurrentBoard.getCell(col,row)!=0){
-					g.setColor(mCurrentBoard.getColour(col, row));
+					g.setColor(BlockType.getColor(mCurrentBoard.getCell(col, row)));
 					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);
 				}
 			}

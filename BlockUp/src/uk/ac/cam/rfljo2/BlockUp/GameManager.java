@@ -102,8 +102,8 @@ public class GameManager {
 						resultClone = new ReverseSquiggly(nextBoard);
 		}
 		
-		result.makePowerBlock();
-		resultClone.makePowerBlock();
+		//result.makePowerBlock();
+		//resultClone.makePowerBlock();
 		output.refreshBlock(resultClone,nextBoard);
 		return result;
 	}
@@ -121,11 +121,11 @@ public class GameManager {
 			board.setNextBlock(generateBlock(board));
 		}
 		try {
-			if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
-			else{ 
+			//if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
+			//else{ 
 				boolean success = board.getActiveBlock().place(4, 19, (byte)0);
 				if(!success) gameOver();
-			}
+			//}
 		} catch (InvalidArgException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

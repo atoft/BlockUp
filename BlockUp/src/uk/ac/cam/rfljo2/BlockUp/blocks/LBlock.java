@@ -14,7 +14,7 @@ public class LBlock extends Block {
 
 	
 	public LBlock(GameBoard b) {
-		super(b,(byte) 3,Color.orange);
+		super(b, BlockType.ORANGE);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);
@@ -29,31 +29,31 @@ public class LBlock extends Block {
 		Cell[] cells = this.getCells();
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(),cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(),cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType(),cells[3].getColour());
+			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType());
 		}
 		if (getRotationState() == 1) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i,cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i,cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType(),cells[3].getColour());
+			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
 		}
 		if (getRotationState() == 2) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType(),cells[3].getColour());
+			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType());
 		}
 		if (getRotationState() == 3) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType(),cells[i].getColour());
+				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType(),cells[3].getColour());
+			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType());
 		}
 		
 		this.setCells(cells);
