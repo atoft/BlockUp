@@ -48,15 +48,19 @@ public class GameManager {
 	 */
 	private void placementCheck(){
 		if (activeBlock.isFinallyPlaced()){ 
+			//pause();
 			List<Integer> clearedRows = mainBoard.clearFullRows();
 			if(clearedRows!=null){
 				output.viewScreen.flashBlocks(mainBoard, clearedRows);
-				/*
-				 * An initial attempt at displaying a flashing animation when the rows are cleared.
-				 * Doesn't behave properly because the game continues while the animation is
-				 * playing. TODO: Need a way to stop pause execution until the animation is done.
-				 */
+				
+				
+				
+				
+				
+			//	output.viewScreen.flashBlocks(mainBoard, clearedRows);
+				
 			}
+			//pause();
 			spawnNextBlock();
 			
 		}

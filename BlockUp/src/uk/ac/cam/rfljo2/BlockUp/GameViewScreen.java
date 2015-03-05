@@ -29,8 +29,17 @@ public class GameViewScreen extends JPanel{
 	
 	private boolean doneFlashing;
 	private boolean flashState;
-	List<Integer> flashRows;
 	
+	public void setFlashState(boolean flashState) {
+		this.flashState = flashState;
+	}
+
+	private List<Integer> flashRows;
+	
+	public void setFlashRows(List<Integer> flashRows) {
+		this.flashRows = flashRows;
+	}
+
 	public GameViewScreen(int width, int height){
 		mBoardWidth = width;
 		mBoardHeight = height;
@@ -70,10 +79,12 @@ public class GameViewScreen extends JPanel{
 		for(int y=0;y<(mBoardHeight);y++){
 			g.drawLine(0,mCellSize*y,width,mCellSize*y);
 		}
-		
+		System.out.println("Frogs");
+
 		//Flash rows
 		if(flashState){
 			for(int i : flashRows){
+				System.out.println("Cheese");
 				g.setColor(java.awt.Color.white);
 				g.fillRect(0,i*mCellSize,width,mCellSize);
 			}
@@ -107,7 +118,22 @@ public class GameViewScreen extends JPanel{
 	 * @param toFlash The list of rows over which to display the animation
 	 */
 	public void flashBlocks(GameBoard currentBoard, List<Integer>toFlash){
-		flashRows = toFlash;
+		setFlashRows(toFlash);
+		setFlashState(true);
+		updateView(currentBoard);
+
+		setFlashState(false);
+		repaint();
+	
+		setFlashState(true);
+		repaint();
+	
+		setFlashState(false);
+		repaint();
+		
+		
+		
+		/* flashRows = toFlash;
 		mBoard = currentBoard;
 		Timer flashTimer = new Timer(flashDelay, new ActionListener() {
 			int rep = 0;
@@ -122,6 +148,6 @@ public class GameViewScreen extends JPanel{
 				rep++;
 			}
 		});
-		flashTimer.start();
+		flashTimer.start(); */
 	}
 }
