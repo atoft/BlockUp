@@ -1,6 +1,6 @@
 A temporary list of bugs and features that we need to discuss how to deal with.
 
-- Finish implementing new colour method
+- Finish implementing new colour method (DONE)
 - Fix implementation of next block, shouldn't require clones of objects!
 - Fix problems with power block implementation (Tom?)
 
