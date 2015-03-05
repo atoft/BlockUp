@@ -1,4 +1,4 @@
-package uk.ac.cam.rfljo2.BlockUp.blocks;
+package uk.ac.cam.rfljo2.BlockUp;
 
 import java.awt.Color;
 
