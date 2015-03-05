@@ -118,7 +118,7 @@ public abstract class Block {
 	 */
 	public void showBlock() {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(),(byte) 0);
+			mBoard.setCell(c.getCol(), c.getRow(),c.getType());
 		}
 
 	}
