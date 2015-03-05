@@ -14,8 +14,6 @@ import java.util.Random;
  */
 public abstract class Block {
 
-	private GameBoard mBoard; // Stores a reference to the board occupied by
-								// this block
 	private Cell[] mCells; // Cells belonging to that block
 
 	private Queue<Byte> mRotationQueue; // The Q holding the next rotation state
@@ -35,7 +33,6 @@ public abstract class Block {
 	protected Block(GameBoard b, byte type) {
 		rotationState = 0;
 		isFinallyPlaced = false;
-		mBoard = b;
 		mCells = new Cell[4];
 		for (int i = 0; i < mCells.length; i++) {
 			mCells[i] = new Cell(-10, -10, type);
@@ -46,9 +43,7 @@ public abstract class Block {
 	}
 
 	
-	public void setGameBoard(GameBoard b) {
-		mBoard = b;
-	}
+
 	/**
 	 * Returns the array containing the Cells belonging to this block
 	 * 
@@ -107,18 +102,18 @@ public abstract class Block {
 	/**
 	 * Hides the block from the GameBoard
 	 */
-	public void hideBlock() {
+	public void hideBlock(GameBoard board) {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(), (byte) 0);
+			board.setCell(c.getCol(), c.getRow(), (byte) 0);
 		}
 	}
 
 	/**
 	 * Shows the block on the GameBoard, based upon its current rotationState and pivotPoint
 	 */
-	public void showBlock() {
+	public void showBlock(GameBoard board) {
 		for (Cell c : mCells) {
-			mBoard.setCell(c.getCol(), c.getRow(),c.getType());
+			board.setCell(c.getCol(), c.getRow(),c.getType());
 		}
 
 	}
@@ -151,7 +146,7 @@ public abstract class Block {
 	 * @throws InvalidArgException if the rotationState is not valid for the type of block
 	 * @return true if the block can be successfully placed without collision
 	 */
-	public boolean place(int col, int row, byte rotationState)
+	public boolean place(int col, int row, byte rotationState, GameBoard board)
 			throws InvalidArgException {
 		if (rotationState < 0 || rotationState > 3)
 			throw new InvalidArgException();
@@ -159,20 +154,20 @@ public abstract class Block {
 		Cell oldPivotPoint = getPivotPoint();
 		Cell c = new Cell(col, row,(byte) 0); //TODO: look at this
 		if (getPivotPoint() != null)
-			hideBlock();
+			hideBlock(board);
 		setPivotPoint(c);
 		setRotationState(rotationState);
 		regenerateCells();
 		for (Cell d : mCells) {
-			if (mBoard.getCell(d.getCol(), d.getRow()) != 0) {
+			if (board.getCell(d.getCol(), d.getRow()) != 0) {
 				setPivotPoint(oldPivotPoint);
 				setRotationState(oldRotationState);
 				regenerateCells();
-				showBlock();
+				showBlock(board);
 				return false;
 			}
 		}
-		this.showBlock();
+		this.showBlock(board);
 		return true;
 	}
 
@@ -180,15 +175,15 @@ public abstract class Block {
 	 * Rotates the block clockwise by 90*, increasing its rotation state by 1
 	 *
 	 */
-	public void rotateClockwise() {
+	public void rotateClockwise(GameBoard board) {
 		byte b = mRotationQueue.peek();
 		try {
 			// try to place the block rotated 90* clockwise
-			this.place(getPivotPoint().getCol(), getPivotPoint().getRow(), b); 
+			this.place(getPivotPoint().getCol(), getPivotPoint().getRow(), b, board); 
 			mRotationQueue.add(b);
 			mRotationQueue.poll();
 		} catch (InvalidArgException e) {
-			showBlock(); // Show the block in its original position if the move
+			showBlock(board); // Show the block in its original position if the move
 							// fails
 			mRotationQueue.add(b);
 		}
@@ -198,13 +193,13 @@ public abstract class Block {
 	 * Attempts to move the block left one unit. If this fails
 	 * then the block remains in its original position
 	 */
-	public void moveLeft() {
+	public void moveLeft(GameBoard board) {
 		try {
 			this.place(getPivotPoint().getCol() - 1, getPivotPoint().getRow(),
-					getRotationState()); // Try to place the block one unit to
+					getRotationState(),board); // Try to place the block one unit to
 											// the left
 		} catch (InvalidArgException e) {
-			showBlock(); // Show the block in its original position if the move
+			showBlock(board); // Show the block in its original position if the move
 							// fails
 		}
 	}
@@ -213,14 +208,14 @@ public abstract class Block {
 	 * Attempts to move the block right one unit. If this fails
 	 * then the block remains in its original position
 	 */
-	public void moveRight() {
+	public void moveRight(GameBoard board) {
 		try {
 			this.place(getPivotPoint().getCol() + 1, getPivotPoint().getRow(),
-					getRotationState()); // Try to place the block one unit to
+					getRotationState(),board); // Try to place the block one unit to
 											// the right
 		} catch (InvalidArgException e) {
 
-			showBlock(); // Show the block in its original position if the move
+			showBlock(board); // Show the block in its original position if the move
 							// fails
 		}
 	}
@@ -230,16 +225,16 @@ public abstract class Block {
 	 * then the block remains in its original position and it is
 	 * set to be finallyPlaced.
 	 */
-	public void moveUp() {
+	public void moveUp(GameBoard board) {
 		try {
 			// Try to place the block one unit up
 			boolean b = this.place(getPivotPoint().getCol(), getPivotPoint()
-					.getRow() - 1, getRotationState()); 
+					.getRow() - 1, getRotationState(),board); 
 			if (b == false)
 				isFinallyPlaced = true; // If an up move fails, the block is
 										// finallyPlaced
 		} catch (InvalidArgException e) {
-			showBlock(); // Show the block in its original position if the move
+			showBlock(board); // Show the block in its original position if the move
 							// fails
 
 		}

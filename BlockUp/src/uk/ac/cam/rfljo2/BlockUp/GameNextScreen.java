@@ -73,7 +73,7 @@ public class GameNextScreen extends GameViewScreen {
 		mNextBlock = next;
 		setBoard(nextBoard);
 		try {
-			mNextBlock.place(2, 2,(byte) 0);
+			mNextBlock.place(2, 2,(byte) 0,nextBoard);
 		} catch (InvalidArgException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

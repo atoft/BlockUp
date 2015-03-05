@@ -32,7 +32,7 @@ public class GameManager {
 		public void actionPerformed(ActionEvent e) {
 			//Do something
 			
-			board.getActiveBlock().moveUp();
+			board.getActiveBlock().moveUp(board);
 			output.refreshScreen(board);
 			placementCheck();
 		}
@@ -123,7 +123,7 @@ public class GameManager {
 		try {
 			//if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
 			//else{ 
-				boolean success = board.getActiveBlock().place(4, 18, (byte)0);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
+				boolean success = board.getActiveBlock().place(4, 18, (byte)0,board);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
 				if(!success) gameOver();
 			//}
 		} catch (InvalidArgException e) {
@@ -179,7 +179,7 @@ public class GameManager {
 			@Override
 			public void rotateBlockLeft() {
 				if(!isPaused){
-					board.getActiveBlock().rotateClockwise();
+					board.getActiveBlock().rotateClockwise(board);
 					output.refreshScreen(board);
 				}
 			}
@@ -192,7 +192,7 @@ public class GameManager {
 			@Override
 			public void moveBlockLeft() {
 				if(!isPaused){
-					board.getActiveBlock().moveLeft();
+					board.getActiveBlock().moveLeft(board);
 					output.refreshScreen(board);
 				}
 			}
@@ -200,7 +200,7 @@ public class GameManager {
 			@Override
 			public void moveBlockRight() {
 				if(!isPaused){
-					board.getActiveBlock().moveRight();
+					board.getActiveBlock().moveRight(board);
 					output.refreshScreen(board);
 				}
 			}
@@ -214,7 +214,7 @@ public class GameManager {
 			@Override
 			public void speedUpBlock() {
 				if(!isPaused){
-					board.getActiveBlock().moveUp();
+					board.getActiveBlock().moveUp(board);
 					playTimer.restart();
 					output.refreshScreen(board);
 					placementCheck();
