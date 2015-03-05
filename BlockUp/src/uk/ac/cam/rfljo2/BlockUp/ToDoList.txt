@@ -5,7 +5,6 @@ A temporary list of bugs and features that we need to discuss how to deal with.
 =======
 - Finish implementing new colour method (DONE)
 >>>>>>> branch 'master' of https://github.com/atoft/BlockUp.git
-- Fix implementation of next block, shouldn't require clones of objects!
 - Fix problems with power block implementation (Tom?)
 
 - Row clearing animation (flashing) needs the ability to pause gameplay whilst it plays

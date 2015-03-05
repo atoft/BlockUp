@@ -24,34 +24,34 @@ public class TBlock extends Block {
 
 	@Override
 	public void regenerateCells() {
-		Cell[] cells = this.getCells();
+		Piece[] cells = this.getCells();
 		if (getRotationState() == 0) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(), cells[i].getType());
+				Piece c = new Piece(getPivotPoint().getCol() - 1 + i,getPivotPoint().getRow(), cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[3].getType());
+			cells[3] = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[3].getType());
 		}
 		if (getRotationState() == 1) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i, cells[i].getType());
+				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() + 1 - i, cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() - 1,getPivotPoint().getRow(),cells[3].getType());
+			cells[3] = new Piece(getPivotPoint().getCol() - 1,getPivotPoint().getRow(),cells[3].getType());
 		}
 		if (getRotationState() == 2) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType());
+				Piece c = new Piece(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() + 1,cells[3].getType());
+			cells[3] = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() + 1,cells[3].getType());
 		}
 		if (getRotationState() == 3) {
 			for (int i = 0; i < 3; i++) {
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType());
+				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1 + i,cells[i].getType());
 				cells[i] = c;
 			}
-			cells[3] = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[3].getType());
+			cells[3] = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[3].getType());
 		}
 		
 		this.setCells(cells);

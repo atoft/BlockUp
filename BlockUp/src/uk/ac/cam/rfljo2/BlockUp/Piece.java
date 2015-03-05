@@ -5,14 +5,14 @@ import java.awt.Color;
 /**
  * Holds a pair containing a column and a row value
  */
-public class Cell {
+public class Piece {
 	
 	private final int mCol;
 	private final int mRow;
 	private byte mType;
 	
 	
-	public Cell(int column, int row, byte type) {
+	public Piece(int column, int row, byte type) {
 		mCol = column;
 		mRow = row;
 		mType = type;
@@ -50,7 +50,7 @@ public class Cell {
 	 * @param c the cell to compare to
 	 * @return true if the row and column of c are equal to the row and column of this
 	 */
-	public boolean equals(Cell c) {
+	public boolean equals(Piece c) {
 		return (c.mCol == this.mCol && c.mRow == this.mRow);
 	}
 }

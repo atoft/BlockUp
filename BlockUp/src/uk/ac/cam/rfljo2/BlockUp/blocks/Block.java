@@ -14,11 +14,11 @@ import java.util.Random;
  */
 public abstract class Block {
 
-	private Cell[] mCells; // Cells belonging to that block
+	private Piece[] mCells; // Cells belonging to that block
 
 	private Queue<Byte> mRotationQueue; // The Q holding the next rotation state
 
-	private Cell mPivotPoint; // The point at which the block pivots / rotates
+	private Piece mPivotPoint; // The point at which the block pivots / rotates
 	
 	private boolean isFinallyPlaced;
 
@@ -33,11 +33,11 @@ public abstract class Block {
 	protected Block(byte type) {
 		rotationState = 0;
 		isFinallyPlaced = false;
-		mCells = new Cell[4];
+		mCells = new Piece[4];
 		for (int i = 0; i < mCells.length; i++) {
-			mCells[i] = new Cell(-10, -10, type);
+			mCells[i] = new Piece(-10, -10, type);
 		}
-		setPivotPoint(new Cell(-10, -10, type)); // PivotPoint set to an arbitrary
+		setPivotPoint(new Piece(-10, -10, type)); // PivotPoint set to an arbitrary
 		// value
 		regenerateCells();
 	}
@@ -49,7 +49,7 @@ public abstract class Block {
 	 * 
 	 * @return an array of the Cells belonging to this block
 	 */
-	public Cell[] getCells() {
+	public Piece[] getCells() {
 		return mCells;
 	}
 
@@ -57,7 +57,7 @@ public abstract class Block {
 	 * Sets the cells belonging to this block to a copy of the given Array
 	 * @param cells an array containing the new cells that will belong to this block
 	 */
-	public void setCells(Cell[] cells) {
+	public void setCells(Piece[] cells) {
 		mCells = cells.clone();
 	}
 	
@@ -73,7 +73,7 @@ public abstract class Block {
 	 * Returns the new Cell at which this block currently pivots / rotates
 	 * @return the current pivotPoint of the cell
 	 */
-	public Cell getPivotPoint() {
+	public Piece getPivotPoint() {
 		return mPivotPoint;
 	}
 
@@ -81,7 +81,7 @@ public abstract class Block {
 	 * Sets the pivot point of this to the specified Cell
 	 * @param pivotPoint the Cell to set as the new pivotPoint of this
 	 */
-	public void setPivotPoint(Cell pivotPoint) {
+	public void setPivotPoint(Piece pivotPoint) {
 		this.mPivotPoint = pivotPoint;
 	}
 	
@@ -103,7 +103,7 @@ public abstract class Block {
 	 * Hides the block from the GameBoard
 	 */
 	public void hideBlock(GameBoard board) {
-		for (Cell c : mCells) {
+		for (Piece c : mCells) {
 			board.setCell(c.getCol(), c.getRow(), (byte) 0);
 		}
 	}
@@ -112,7 +112,7 @@ public abstract class Block {
 	 * Shows the block on the GameBoard, based upon its current rotationState and pivotPoint
 	 */
 	public void showBlock(GameBoard board) {
-		for (Cell c : mCells) {
+		for (Piece c : mCells) {
 			board.setCell(c.getCol(), c.getRow(),c.getType());
 		}
 
@@ -151,14 +151,14 @@ public abstract class Block {
 		if (rotationState < 0 || rotationState > 3)
 			throw new InvalidArgException();
 		byte oldRotationState = getRotationState();
-		Cell oldPivotPoint = getPivotPoint();
-		Cell c = new Cell(col, row,(byte) 0); //TODO: look at this
+		Piece oldPivotPoint = getPivotPoint();
+		Piece c = new Piece(col, row,(byte) 0); //TODO: look at this
 		if (getPivotPoint() != null)
 			hideBlock(board);
 		setPivotPoint(c);
 		setRotationState(rotationState);
 		regenerateCells();
-		for (Cell d : mCells) {
+		for (Piece d : mCells) {
 			if (board.getCell(d.getCol(), d.getRow()) != 0) {
 				setPivotPoint(oldPivotPoint);
 				setRotationState(oldRotationState);

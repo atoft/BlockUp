@@ -25,12 +25,12 @@ public class Square extends Block {
 
 	@Override
 	public void regenerateCells() {
-		Cell[] cells = this.getCells();
+		Piece[] cells = this.getCells();
 		if (getRotationState() == 0) {	
-				Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[0].getType());
-				Cell d = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[1].getType());
-				Cell e = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[2].getType());
-				Cell f = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[3].getType());
+				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[0].getType());
+				Piece d = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[1].getType());
+				Piece e = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[2].getType());
+				Piece f = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[3].getType());
 				
 				cells[0] = c;
 				cells[1] = d;
@@ -38,10 +38,10 @@ public class Square extends Block {
 				cells[3] = f;
 		}
 		if (getRotationState() == 1) {	
-			Cell f = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[3].getType());
-			Cell c = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[0].getType());
-			Cell d = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[1].getType());
-			Cell e = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[2].getType());
+			Piece f = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[3].getType());
+			Piece c = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[0].getType());
+			Piece d = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[1].getType());
+			Piece e = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[2].getType());
 			
 			cells[0] = c;
 			cells[1] = d;
@@ -49,10 +49,10 @@ public class Square extends Block {
 			cells[3] = f;
 		}
 		if (getRotationState() == 2) {	
-			Cell e = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[2].getType());
-			Cell f = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[3].getType());
-			Cell c = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[0].getType());
-			Cell d = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[1].getType());
+			Piece e = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[2].getType());
+			Piece f = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[3].getType());
+			Piece c = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[0].getType());
+			Piece d = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[1].getType());
 			
 			cells[0] = c;
 			cells[1] = d;
@@ -60,10 +60,10 @@ public class Square extends Block {
 			cells[3] = f;
 		}
 		if (getRotationState() == 3) {	
-			Cell d = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[1].getType());
-			Cell e = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[2].getType());
-			Cell f = new Cell(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
-			Cell c = new Cell(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[0].getType());
+			Piece d = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow(),cells[1].getType());
+			Piece e = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[2].getType());
+			Piece f = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
+			Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[0].getType());
 			
 			cells[0] = c;
 			cells[1] = d;
