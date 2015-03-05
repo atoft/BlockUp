@@ -1,12 +1,9 @@
 A temporary list of bugs and features that we need to discuss how to deal with.
 
-<<<<<<< HEAD
-- Finish implementing new colour method 
-=======
 - Finish implementing new colour method (DONE)
->>>>>>> branch 'master' of https://github.com/atoft/BlockUp.git
-- Fix problems with power block implementation (Tom?)
+- Finish new implementation of blocks
 
+- Replace all values repeated in many places ie. width and height with constants.
 - Row clearing animation (flashing) needs the ability to pause gameplay whilst it plays
 - Pressing quit on GameOver dialog does not properly kill the process
 
