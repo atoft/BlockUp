@@ -14,8 +14,8 @@ public class LineBlock extends Block {
 	
 	
 	
-	public LineBlock(GameBoard b) {
-		super(b, BlockType.CYAN);
+	public LineBlock() {
+		super(BlockType.CYAN);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

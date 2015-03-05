@@ -12,8 +12,8 @@ import java.util.Queue;
 public class TBlock extends Block {
 
 	
-	public TBlock(GameBoard b) {
-		super(b,BlockType.MAGENTA);
+	public TBlock() {
+		super(BlockType.MAGENTA);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

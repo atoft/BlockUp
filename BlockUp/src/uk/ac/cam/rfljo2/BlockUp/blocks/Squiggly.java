@@ -14,8 +14,8 @@ public class Squiggly extends Block {
 
 	
 	
-	public Squiggly(GameBoard b) {
-		super(b,BlockType.GREEN);
+	public Squiggly() {
+		super(BlockType.GREEN);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

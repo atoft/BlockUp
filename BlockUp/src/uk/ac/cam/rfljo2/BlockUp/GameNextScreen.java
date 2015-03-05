@@ -38,7 +38,8 @@ public class GameNextScreen extends GameViewScreen {
 	 */
 	public void updateNext(Block next, GameBoard nextBoard){
 		mNextBlock = next;
-		setBoard(nextBoard);
+		this.setBoard(nextBoard);
+		nextBoard.clearAllRows();
 		try {
 			mNextBlock.place(2, 2,(byte) 0,nextBoard);
 		} catch (InvalidArgException e) {

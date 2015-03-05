@@ -30,7 +30,7 @@ public abstract class Block {
 	 * Constructs a new vanilla block. Setting all cells to a certain type.
 	 * @param b a reference to a GameBoard to place the block on
 	 */
-	protected Block(GameBoard b, byte type) {
+	protected Block(byte type) {
 		rotationState = 0;
 		isFinallyPlaced = false;
 		mCells = new Cell[4];

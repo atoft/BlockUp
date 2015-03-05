@@ -14,9 +14,6 @@ public class GameBoard {
 	
 	private Row[] mRows; // Row 0 is at the top
 	
-	private Block activeBlock;	// reference to the block on the board that is active and can be moved
-	private Block nextBlock;	// the block which will be added once the current block lands
-	
 	/**
 	 * Constructs a blank GameBoard with a specified number of rows
 	 * @param rows the number of rows to add to the GameBoard
@@ -95,19 +92,4 @@ public class GameBoard {
 		return mRows[row].getCell(col);
 	}
 
-	public Block getActiveBlock() {
-		return activeBlock;
-	}
-
-	public void setActiveBlock(Block activeBlock) {
-		this.activeBlock = activeBlock;
-	}
-
-	public Block getNextBlock() {
-		return nextBlock;
-	}
-
-	public void setNextBlock(Block nextBlock) {
-		this.nextBlock = nextBlock;
-	}
 }
