@@ -1,0 +1,13 @@
+A temporary list of bugs and features that we need to discuss how to deal with.
+
+- Finish implementing new colour method
+
+- Fix problems with power block implementation (Tom?)
+
+- Row clearing animation (flashing) needs the ability to pause gameplay whilst it plays
+- Pressing quit on GameOver dialog does not properly kill the process
+
+
+- Add a scoring system
+? Use listeners and events to handle game logic
+- Add power-ups!
