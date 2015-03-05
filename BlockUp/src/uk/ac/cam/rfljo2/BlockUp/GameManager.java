@@ -124,7 +124,7 @@ public class GameManager {
 			//if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
 			//else{ 
 				boolean success = board.getActiveBlock().place(4, 18, (byte)0,board);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
-				if(!success) gameOver();
+				if(!success) gameOver();	//If success is false, the block cannot fit in the board, so the game ends.
 			//}
 		} catch (InvalidArgException e) {
 			// TODO Auto-generated catch block
