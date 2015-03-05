@@ -12,22 +12,30 @@ import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
  * @author Robin Otter
  * @author Alastair Toft
  */
-public class GameNextScreen extends JPanel {
-	private int mBoardWidth = 4;
-	private int mBoardHeight = 4;
-	private int mCellSize = 30;
-	private GameBoard mNextBoard;
+public class GameNextScreen extends GameViewScreen {
+	
+	
+	//private int mBoardWidth = 4;
+	//private int mBoardHeight = 4;
+	//private int mCellSize = 30;
+	//protected GameBoard mBoard;
 	
 	private Block mNextBlock;
 	
-	@Override
+	public GameNextScreen(int width, int height){
+		super(width,height);
+	}
+	
+	/*@Override*/
 	/**
 	 * Overrides the JPanel inbuilt paintComponent to draw the game grid.
 	 * First fills in the background colour, then loops over the array to
 	 * draw blocks, before finally drawing grid lines.
 	 */
 	protected void paintComponent(Graphics g){
-		
+		super.paintComponent(g);
+	}
+		/*
 		int width = mBoardWidth * mCellSize;		//Calculate the size of the board and fill it with a background colour
 		int height = mBoardHeight * mCellSize;
 		g.setColor(java.awt.Color.black);
@@ -53,7 +61,7 @@ public class GameNextScreen extends JPanel {
 			g.drawLine(0,mCellSize*y,width,mCellSize*y);
 		}
 		
-	}
+	}*/
 	
 	/**
 	 * Given the new version of the game grid, refreshes the displayed view.
@@ -63,7 +71,7 @@ public class GameNextScreen extends JPanel {
 	 */
 	public void updateNext(Block next, GameBoard nextBoard){
 		mNextBlock = next;
-		mNextBoard = nextBoard;
+		setBoard(nextBoard);
 		try {
 			mNextBlock.place(2, 2,(byte) 0);
 		} catch (InvalidArgException e) {

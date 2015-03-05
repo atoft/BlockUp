@@ -25,13 +25,16 @@ public class GameViewScreen extends JPanel{
 	private int flashDelay = 100;
 	private int numFlashes = 5;
 	
-	private GameBoard mCurrentBoard;
+	private GameBoard mBoard;
 	
 	private boolean doneFlashing;
 	private boolean flashState;
 	List<Integer> flashRows;
 	
-	
+	public GameViewScreen(int width, int height){
+		mBoardWidth = width;
+		mBoardHeight = height;
+	}
 	
 	@Override
 	/**
@@ -46,12 +49,12 @@ public class GameViewScreen extends JPanel{
 		g.setColor(java.awt.Color.black);
 		g.fillRect(0,0,width,height);
 		
-		if(mCurrentBoard==null) return;
+		if(mBoard==null) return;
 		
 		for(int row=0; row<mBoardHeight;row++){//Loop over all cells in the board array
 			for(int col=0; col<mBoardWidth;col++){
 				
-				byte currentType = mCurrentBoard.getCell(col,row);
+				byte currentType = mBoard.getCell(col,row);
 				if(currentType!=0){
 					g.setColor(BlockType.getColor(currentType));	//Convert the current cell type to a colo(u)r.
 					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
@@ -84,10 +87,20 @@ public class GameViewScreen extends JPanel{
 	 * @param currentBoard The board to display
 	 */
 	public void updateView(GameBoard currentBoard){
-		mCurrentBoard = currentBoard;
+		mBoard = currentBoard;
 		repaint();
 	}
 	
+	
+	
+	/**
+	 * Sets the Game Board without updating the screen.
+	 * @param currentBoard
+	 */
+	public void setBoard(GameBoard currentBoard){
+		mBoard = currentBoard;
+	}
+
 	/**
 	 * Updates the board and runs the flashing animation on a list of rows.
 	 * @param currentBoard
@@ -95,7 +108,7 @@ public class GameViewScreen extends JPanel{
 	 */
 	public void flashBlocks(GameBoard currentBoard, List<Integer>toFlash){
 		flashRows = toFlash;
-		mCurrentBoard = currentBoard;
+		mBoard = currentBoard;
 		Timer flashTimer = new Timer(flashDelay, new ActionListener() {
 			int rep = 0;
 			public void actionPerformed(ActionEvent e) {

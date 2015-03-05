@@ -48,9 +48,9 @@ public class GameUI extends JFrame{
 		addBorder(viewPanel, Strings.GUI_VIEW_LABEL);
 		add(viewPanel,BorderLayout.CENTER);
 		
-		viewScreen = new GameViewScreen();	//Creates an instance of our custom ViewScreen class
+		viewScreen = new GameViewScreen(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);	//Creates an instance of our custom ViewScreen class
 		viewPanel.add(viewScreen);
-		nextBlockScreen = new GameNextScreen();
+		nextBlockScreen = new GameNextScreen(4,4);
 		
 		gameManager = new GameManager(this);
 		
