@@ -12,8 +12,8 @@ import java.util.Queue;
 public class ReverseLBlock extends Block {
 
 	
-	public ReverseLBlock(GameBoard b) {
-		super(b,BlockType.BLUE);
+	public ReverseLBlock() {
+		super(BlockType.BLUE);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

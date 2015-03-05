@@ -13,8 +13,8 @@ import java.util.Queue;
 public class LBlock extends Block {
 
 	
-	public LBlock(GameBoard b) {
-		super(b, BlockType.ORANGE);
+	public LBlock() {
+		super(BlockType.ORANGE);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

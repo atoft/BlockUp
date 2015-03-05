@@ -13,8 +13,8 @@ import uk.ac.cam.rfljo2.BlockUp.*;
 public class Square extends Block {
 
 	
-	public Square(GameBoard b) {
-		super(b,BlockType.YELLOW);
+	public Square() {
+		super(BlockType.YELLOW);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

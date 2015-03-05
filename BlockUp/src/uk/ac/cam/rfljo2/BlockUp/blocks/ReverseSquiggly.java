@@ -16,8 +16,8 @@ public class ReverseSquiggly extends Block {
 	
 	
 	
-	public ReverseSquiggly(GameBoard b) {
-		super(b,BlockType.MAGENTA);
+	public ReverseSquiggly() {
+		super(BlockType.MAGENTA);
 		Queue<Byte> q = new LinkedList<Byte>();
 		q.add((byte) 3);
 		q.add((byte) 2);

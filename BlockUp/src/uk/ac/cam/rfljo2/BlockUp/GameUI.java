@@ -140,7 +140,7 @@ public class GameUI extends JFrame{
 	 * 
 	 * @param id The integer corresponding to this block
 	 */	
-	public void refreshBlock(Block next, GameBoard nextBoard){
+	public void updateNextBlockScreen(Block next, GameBoard nextBoard){
 		nextBlockScreen.updateNext(next, nextBoard);
 	}
 	
