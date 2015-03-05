@@ -50,9 +50,11 @@ public class GameViewScreen extends JPanel{
 		
 		for(int row=0; row<mBoardHeight;row++){//Loop over all cells in the board array
 			for(int col=0; col<mBoardWidth;col++){
-				if(mCurrentBoard.getCell(col,row)!=0){
-					g.setColor(BlockType.getColor(mCurrentBoard.getCell(col, row)));
-					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);
+				
+				byte currentType = mCurrentBoard.getCell(col,row);
+				if(currentType!=0){
+					g.setColor(BlockType.getColor(currentType));	//Convert the current cell type to a colo(u)r.
+					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
 				}
 			}
 		}
@@ -85,6 +87,12 @@ public class GameViewScreen extends JPanel{
 		mCurrentBoard = currentBoard;
 		repaint();
 	}
+	
+	/**
+	 * Updates the board and runs the flashing animation on a list of rows.
+	 * @param currentBoard
+	 * @param toFlash The list of rows over which to display the animation
+	 */
 	public void flashBlocks(GameBoard currentBoard, List<Integer>toFlash){
 		flashRows = toFlash;
 		mCurrentBoard = currentBoard;
