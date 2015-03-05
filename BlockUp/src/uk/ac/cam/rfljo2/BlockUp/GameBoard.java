@@ -43,7 +43,7 @@ public class GameBoard {
 		}
 		if(!fullCheck) return null;
 		
-		Row[] newArray = new Row[20];
+		Row[] newArray = new Row[GameConstants.BOARD_HEIGHT];
 		LinkedList<Integer> removed = new LinkedList<Integer>();
 		int index = 0;
 		for(Row r : mRows){
@@ -53,8 +53,8 @@ public class GameBoard {
 			}
 			else removed.add(index);
 		}
-		for(int j = index; j<20;j++){
-			newArray[j]=new Row(10);	
+		for(int j = index; j<GameConstants.BOARD_HEIGHT;j++){
+			newArray[j]=new Row(GameConstants.BOARD_WIDTH);	
 		}
 		mRows = newArray;
 		
