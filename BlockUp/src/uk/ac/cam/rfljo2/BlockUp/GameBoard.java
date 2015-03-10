@@ -16,13 +16,13 @@ public class GameBoard {
 	
 	/**
 	 * Constructs a blank GameBoard with a specified number of rows
-	 * @param rows the number of rows to add to the GameBoard
-	 * @param cols the number of cells to place in each row
+	 * @param width the number of cells to place in each row
+	 * @param height the number of rows to add to the GameBoard
 	 */
-	public GameBoard(int rows, int cols) {
-		mRows = new Row[rows]; 
+	public GameBoard(int width, int height) {
+		mRows = new Row[height]; 
 		for (int i = 0; i < mRows.length; i++) {
-			mRows[i] = new Row(cols);
+			mRows[i] = new Row(width);
 		}
 		
 	}
@@ -70,26 +70,26 @@ public class GameBoard {
 	
 	/**
 	 * Sets a cell value in the GameBoard, specified by a row and column
-	 * @param col the column in which to place the value
-	 * @param row the row in which to place the value
+	 * @param x the column in which to place the value
+	 * @param y the row in which to place the value
 	 * @param value the value to store in the GameBoard
 	 */
-	public void setCell(int col, int row, byte type) {
-		if (row > mRows.length - 1 || row < 0) return;
-		if (col > mRows[0].length() - 1 || col < 0) return;
-		mRows[row].setCell(col, type);
+	public void setCell(int x, int y, byte type) {
+		if (y > mRows.length - 1 || y < 0) return;
+		if (x > mRows[0].length() - 1 || x < 0) return;
+		mRows[y].setCell(x, type);
 	}
 	
 	/**
 	 * Returns the cell value at the specified row and column
-	 * @param col the column of the cell in question
-	 * @param row the row of the cell in question
+	 * @param x the column of the cell in question
+	 * @param y the row of the cell in question
 	 * @return the byte value contained in the specified cell
 	 */
-	public byte getCell(int col, int row) {
-		if (row > mRows.length - 1 || row < 0) return -1; 
-		if (col > mRows[0].length() - 1 || col < 0) return -1;
-		return mRows[row].getCell(col);
+	public byte getCell(int x, int y) {
+		if (y > mRows.length - 1 || y < 0) return -1; 
+		if (x > mRows[0].length() - 1 || x < 0) return -1;
+		return mRows[y].getCell(x);
 	}
 	
 	public void setActiveBlock(Block b) {
@@ -99,5 +99,20 @@ public class GameBoard {
 	public Block getActiveBlock() {
 		return mActiveBlock;
 	}
-
+	
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public boolean collisionTest(int x, int y){
+		for(Piece p : mActiveBlock.getPieces()){
+			if(this.getCell(p.getY() +y, p.getX() +x)!=-1 || this.getCell(p.getY(), p.getX())!=0){
+				return true;
+			}
+		}
+		return false;
+		
+	}
 }
