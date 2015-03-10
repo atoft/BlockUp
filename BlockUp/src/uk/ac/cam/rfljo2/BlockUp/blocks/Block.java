@@ -70,55 +70,48 @@ public class Block {
 
 	/**
 	 * Sets the current state of rotation to the specified value
+	 * Then rotates the block.
 	 * @param rotationState the new value of the rotationState of this block
 	 */
-	//public void setRotationState(int rotationState) {
-	//	mRotationState = rotationState;
-	//}
-
+	public void setRotationState(int rotationState) {
+		mRotationState = (rotationState - mRotationState) % 4;
+		if(mRotationState < 0) mRotationState +=4;
+		rotate(mRotationState);
+		mRotationState = rotationState;
+	}
 	
 	/**
-	 * Place the block at the specified position on the GameBoard
-	 * @param col the column at which to set the PivotPoint
-	 * @param row the row at which to set the PivotPoint
-	 * @param rotationState the rotation state of the new block when it is placed
-	 * @throws InvalidArgException if the rotationState is not valid for the type of block
-	 * @return true if the block can be successfully placed without collision
-	 *//*
-	public boolean place(int col, int row, byte rotationState, GameBoard board)
-			throws InvalidArgException {
-		if (rotationState < 0 || rotationState > 3)
-			throw new InvalidArgException();
-		byte oldRotationState = getRotationState();
-		Piece oldPivotPoint = getPivotPoint();
-		Piece c = new Piece(col, row,(byte) 0); //TODO: look at this
-		if (getPivotPoint() != null)
-			hideBlock(board);
-		setPivotPoint(c);
-		setRotationState(rotationState);
-		regenerateCells();
-		for (Piece d : mCells) {
-			if (board.getCell(d.getCol(), d.getRow()) != 0) {
-				setPivotPoint(oldPivotPoint);
-				setRotationState(oldRotationState);
-				regenerateCells();
-				showBlock(board);
-				return false;
+	 * Implements the actual rotation of the block
+	 * The is the method to override if any.
+	 */
+	protected void rotate(int amount) {
+		switch(amount) {
+		case 1:
+			for(int i = 0; i < mPieces.length; i++) {
+				mPieces[i] = mPieces[i].rotate90();
 			}
+		break;
+		case 2:
+			for(int i = 0; i < mPieces.length; i++) {
+				mPieces[i] = mPieces[i].rotate180();
+			}
+		break;
+		case 3:
+			for(int i = 0; i < mPieces.length; i++) {
+				mPieces[i] = mPieces[i].rotate270();
+			}
+		break;
 		}
-		this.showBlock(board);
-		return true;
-	} */
+	}
+
+
 
 	/**
 	 * Rotates the block clockwise by 90*,
 	 *
 	 */
 	public void rotateClockwise() {
-		mRotationState = (mRotationState + 1) % 4;
-		for(int i = 0; i < mPieces.length; i++) {
-			mPieces[i] = mPieces[i].rotate90();
-		}
+		setRotationState(mRotationState + 1);
 	}
 	
 	/**
@@ -126,7 +119,7 @@ public class Block {
 	 *
 	 */
 	public void rotateAntiClockwise() {
-		mRotationState = (mRotationState - 1) % 4;
+		setRotationState(mRotationState - 1);
 	}
 	
 	public void setX(int x) {
