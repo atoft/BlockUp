@@ -22,7 +22,7 @@ public class Piece {
 	 * Gets the current row stored in the cell
 	 * @return the integer value of the row of the cell
 	 */
-	public int getRow() {
+	public int getY() {
 		return mRow;
 	}
 	
@@ -30,7 +30,7 @@ public class Piece {
 	 * Gets the current column stored in the cell
 	 * @return the integer value of the column of the cell
 	 */
-	public int getCol() {
+	public int getX() {
 		return mCol;
 	}
 	
@@ -59,17 +59,17 @@ public class Piece {
 		switch (rotationState) {
 			case 1:
 				for(int i = 0; i < pieces.length; i++) {
-					pieces[i] = new Piece(-pieces[i].getRow(), pieces[i].getCol(), pieces[i].getType());
+					pieces[i] = new Piece(-pieces[i].getY(), pieces[i].getX(), pieces[i].getType());
 				}
 				break;
 			case 2:
 				for(int i = 0; i < pieces.length; i++) {
-					pieces[i] = new Piece(-pieces[i].getCol(), -pieces[i].getRow(), pieces[i].getType());
+					pieces[i] = new Piece(-pieces[i].getX(), -pieces[i].getY(), pieces[i].getType());
 				}
 				break;
 			case 3:
 				for(int i = 0; i < pieces.length; i++) {
-					pieces[i] = new Piece(pieces[i].getRow(), -pieces[i].getCol(), pieces[i].getType());
+					pieces[i] = new Piece(pieces[i].getY(), -pieces[i].getX(), pieces[i].getType());
 				}
 				break;	
 		}

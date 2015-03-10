@@ -72,9 +72,23 @@ public class GameViewScreen extends JPanel{
 			if(bP.getType() != 0) {
 				g.setColor(BlockType.getColor(type));
 				//fill in the rectangle at the correct offset
+				g.fillRect((bP.getX()+activeBlock.getX())*mCellSize,(bP.getY()+activeBlock.getY())*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
+			}
+		}
+		
+		/*
+		Block activeBlock = mBoard.getActiveBlock();
+		Piece[] blockPieces = activeBlock.getPieces();
+		for(int i = 0; i < blockPieces.length; i++) {
+			Piece bP = blockPieces[i];
+			byte type = bP.getType();
+			if(bP.getType() != 0) {
+				g.setColor(BlockType.getColor(type));
+				//fill in the rectangle at the correct offset
 				g.fillRect((bP.getCol()+activeBlock.getX())*mCellSize,(bP.getRow()+activeBlock.getY())*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
 			}
 		}
+		*/
 		
 		//Draw light gray lines onto the board
 		g.setColor(java.awt.Color.LIGHT_GRAY);
