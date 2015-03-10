@@ -72,9 +72,9 @@ public class Block {
 	 * Sets the current state of rotation to the specified value
 	 * @param rotationState the new value of the rotationState of this block
 	 */
-	public void setRotationState(int rotationState) {
-		mRotationState = rotationState;
-	}
+	//public void setRotationState(int rotationState) {
+	//	mRotationState = rotationState;
+	//}
 
 	
 	/**
@@ -116,6 +116,9 @@ public class Block {
 	 */
 	public void rotateClockwise() {
 		mRotationState = (mRotationState + 1) % 4;
+		for(int i = 0; i < mPieces.length; i++) {
+			mPieces[i] = mPieces[i].rotate90();
+		}
 	}
 	
 	/**
