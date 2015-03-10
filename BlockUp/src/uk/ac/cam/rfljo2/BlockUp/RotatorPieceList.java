@@ -38,13 +38,13 @@ public class RotatorPieceList extends LinkedList<Piece> {
 			    Piece next = (Piece) old.next();
 			    switch(mRotationState) {
 			    	case 1:
-			    		next = new Piece(-next.getCol(), next.getRow(), next.getType());
+			    		next = new Piece(-next.getRow(), next.getCol(), next.getType());
 			    		break;
 			    	case 2:
-			    		next = new Piece(-next.getRow(), -next.getCol(), next.getType());
+			    		next = new Piece(-next.getCol(), -next.getRow(), next.getType());
 			    		break;
 			    	case 3:
-			    		next = new Piece(next.getCol(), -next.getRow(), next.getType());
+			    		next = new Piece(next.getRow(), -next.getCol(), next.getType());
 			    		break;
 			    }
 			    return next;
