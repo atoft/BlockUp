@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class BlockType {
 
-	public static final byte BLACK = 0;
+	public static final byte EMPTY = 0;
 	public static final byte CYAN = 1;
 	public static final byte BLUE = 2;
 	public static final byte ORANGE = 3;
@@ -19,7 +19,7 @@ public class BlockType {
 	 */
 	public static Color getColor(byte b) {
 		switch(b) {
-			case BLACK:
+			case EMPTY:
 				return Color.BLACK;
 			case CYAN:
 				return Color.CYAN;
