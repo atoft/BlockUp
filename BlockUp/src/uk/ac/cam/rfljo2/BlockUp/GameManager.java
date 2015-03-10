@@ -66,8 +66,8 @@ public class GameManager {
 	
 	public GameManager(GameUI g){
 		output = g;
-		mainBoard = new GameBoard(GameConstants.BOARD_HEIGHT,GameConstants.BOARD_WIDTH);
-		nextBoard = new GameBoard(GameConstants.NEXT_VIEW_HEIGHT,GameConstants.NEXT_VIEW_WIDTH);
+		mainBoard = new GameBoard(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);
+		nextBoard = new GameBoard(GameConstants.NEXT_VIEW_WIDTH,GameConstants.NEXT_VIEW_HEIGHT);
 		spawnNextBlock();
 		playTimer.start();
 		output.refreshScreen(mainBoard);
@@ -284,6 +284,9 @@ public class GameManager {
 
 	protected void moveActiveBlockUp() {
 		// TODO Auto-generated method stub
+		if(mainBoard.collisionTest(activeBlock.getX(), activeBlock.getY()-1)==false){
+			activeBlock.setY(activeBlock.getY()-1);
+		}
 		
 	}
 
