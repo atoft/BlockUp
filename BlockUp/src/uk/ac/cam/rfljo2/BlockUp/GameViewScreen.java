@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.swing.*;
 
+import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
+
 
 /**
  * A class which renders the current state of the world. Displays grid rows and
@@ -59,6 +61,18 @@ public class GameViewScreen extends JPanel{
 					g.setColor(BlockType.getColor(currentType));	//Convert the current cell type to a colo(u)r.
 					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
 				}
+			}
+		}
+		
+		Block activeBlock = mBoard.getActiveBlock();
+		RotatorPieceList blockPieces = new RotatorPieceList(activeBlock.getPieces());
+		blockPieces.setRotationState(activeBlock.getRotationState());
+		for(Piece bP: blockPieces) {
+			byte type = bP.getType();
+			if(bP.getType() != 0) {
+				g.setColor(BlockType.getColor(type));
+				//fill in the rectangle at the correct offset
+				g.fillRect((bP.getCol()+activeBlock.getX())*mCellSize,(bP.getRow()+activeBlock.getY())*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
 			}
 		}
 		

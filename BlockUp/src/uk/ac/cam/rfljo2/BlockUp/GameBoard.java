@@ -2,7 +2,6 @@ package uk.ac.cam.rfljo2.BlockUp;
 
 import java.util.LinkedList;
 
-
 import uk.ac.cam.rfljo2.BlockUp.blocks.*;
 
 /**
@@ -13,6 +12,7 @@ import uk.ac.cam.rfljo2.BlockUp.blocks.*;
 public class GameBoard {
 	
 	private Row[] mRows; // Row 0 is at the top
+	private Block mActiveBlock;
 	
 	/**
 	 * Constructs a blank GameBoard with a specified number of rows
@@ -90,6 +90,14 @@ public class GameBoard {
 		if (row > mRows.length - 1 || row < 0) return -1; 
 		if (col > mRows[0].length() - 1 || col < 0) return -1;
 		return mRows[row].getCell(col);
+	}
+	
+	public void setActiveBlock(Block b) {
+		mActiveBlock = b;
+	}
+
+	public Block getActiveBlock() {
+		return mActiveBlock;
 	}
 
 }

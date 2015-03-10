@@ -35,7 +35,7 @@ public class GameManager {
 		public void actionPerformed(ActionEvent e) {
 			//Do something
 			
-			activeBlock.moveUp(mainBoard);
+			moveActiveBlockUp();
 			output.refreshScreen(mainBoard);
 			placementCheck();
 		}
@@ -46,8 +46,8 @@ public class GameManager {
 	 * If the current block has landed, clear any full rows and
 	 * spawn the next block.
 	 */
-	private void placementCheck(){
-		if (activeBlock.isFinallyPlaced()){ 
+	private void placementCheck() {
+		/*if (activeBlock.isFinallyPlaced()){ 
 			List<Integer> clearedRows = mainBoard.clearFullRows();
 			if(clearedRows!=null){
 				output.viewScreen.flashBlocks(mainBoard, clearedRows);
@@ -55,11 +55,13 @@ public class GameManager {
 				 * An initial attempt at displaying a flashing animation when the rows are cleared.
 				 * Doesn't behave properly because the game continues while the animation is
 				 * playing. TODO: Need a way to stop pause execution until the animation is done.
-				 */
+				 *//*
 			}
 			spawnNextBlock();
 			
-		}
+		}*/
+		//TODO: Check if the block is off the screen
+		//TODO: Then place the block
 	}
 	
 	public GameManager(GameUI g){
@@ -96,6 +98,7 @@ public class GameManager {
 				break;
 			default:	result = new ReverseSquiggly();
 		}
+		//result = new LBlock();
 		
 		//result.makePowerBlock();
 		
@@ -116,18 +119,16 @@ public class GameManager {
 			nextBlock = generateBlock();
 		}
 		output.updateNextBlockScreen(nextBlock,nextBoard);
-		try {
-			//if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
-			//else{ 
-				activeBlock.setPivotPoint(new Piece(-10, -10,(byte) 0));
-				activeBlock.regenerateCells();
-				boolean success = activeBlock.place(4, 18, (byte)0,mainBoard);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
-				if(!success) gameOver();	//If success is false, the block cannot fit in the board, so the game ends.
-			//}
-		} catch (InvalidArgException e) {
+		mainBoard.setActiveBlock(activeBlock);
+		//try {
+			activeBlock.setX(4);
+			activeBlock.setY(18);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
+			//TODO:!!!!!!!!!!!
+			//if(!success) gameOver();	//If success is false, the block cannot fit in the board, so the game ends.
+		//} catch (InvalidArgException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 		
 	}
 
@@ -177,20 +178,20 @@ public class GameManager {
 			@Override
 			public void rotateBlockLeft() {
 				if(!isPaused){
-					activeBlock.rotateClockwise(mainBoard);
+					activeBlock.rotateClockwise();
 					output.refreshScreen(mainBoard);
 				}
 			}
 
 			@Override
 			public void rotateBlockRight() {
-				
+				activeBlock.rotateAntiClockwise();
 			}
 
 			@Override
 			public void moveBlockLeft() {
 				if(!isPaused){
-					activeBlock.moveLeft(mainBoard);
+					moveActiveBlockLeft();
 					output.refreshScreen(mainBoard);
 				}
 			}
@@ -198,7 +199,7 @@ public class GameManager {
 			@Override
 			public void moveBlockRight() {
 				if(!isPaused){
-					activeBlock.moveRight(mainBoard);
+					moveActiveBlockRight();
 					output.refreshScreen(mainBoard);
 				}
 			}
@@ -212,7 +213,7 @@ public class GameManager {
 			@Override
 			public void speedUpBlock() {
 				if(!isPaused){
-					activeBlock.moveUp(mainBoard);
+					moveActiveBlockUp();
 					playTimer.restart();
 					output.refreshScreen(mainBoard);
 					placementCheck();
@@ -269,6 +270,23 @@ public class GameManager {
 		};
 	}
 	
+	protected void moveActiveBlockLeft() {
+		//TODO: Check if block CAN move left
+		activeBlock.setX(activeBlock.getX() - 1);
+		
+	}
+
+	protected void moveActiveBlockRight() {
+		//TODO: Check if block CAN move right
+		activeBlock.setX(activeBlock.getX() + 1);
+		
+	}
+
+	protected void moveActiveBlockUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * This is the main method for the whole package
 	 * @param args Takes no arguments

@@ -38,14 +38,11 @@ public class GameNextScreen extends GameViewScreen {
 	 */
 	public void updateNext(Block next, GameBoard nextBoard){
 		mNextBlock = next;
+		nextBoard.setActiveBlock(next);
 		this.setBoard(nextBoard);
 		nextBoard.clearAllRows();
-		try {
-			mNextBlock.place(2, 2,(byte) 0,nextBoard);
-		} catch (InvalidArgException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		mNextBlock.setX(2);
+		mNextBlock.setY(2);
 		repaint();
 	}
 }

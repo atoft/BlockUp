@@ -12,67 +12,13 @@ import java.util.Queue;
  */
 public class ReverseSquiggly extends Block {
 	
-	
-	
-	
-	
 	public ReverseSquiggly() {
-		super(BlockType.MAGENTA);
-		Queue<Byte> q = new LinkedList<Byte>();
-		q.add((byte) 3);
-		q.add((byte) 2);
-		q.add((byte) 1);
-		q.add((byte) 0);
-		this.setRotationQueue(q);
+		Piece[] pieces = new Piece[4];
+		pieces[0] = new Piece(0, 0, BlockType.ORANGE);
+		pieces[1] = new Piece(-1, 0, BlockType.ORANGE);
+		pieces[2] = new Piece(0, 1, BlockType.ORANGE);
+		pieces[3] = new Piece(1, 1, BlockType.ORANGE);
+		this.setPieces(pieces);
 	}
 	
-	
-	@Override
-	public void regenerateCells() {
-		Piece[] cells = this.getCells();
-		if (getRotationState() == 0) {
-			for (int i = 0; i < 2; i++) {
-				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - i,cells[i].getType());
-				cells[i] = c;
-			}
-			cells[2] = new Piece(getPivotPoint().getCol() - 1,getPivotPoint().getRow(),cells[2].getType());
-			cells[3] = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow() - 1,cells[3].getType());
-		}
-		if (getRotationState() == 1) {
-			for (int i = 0; i < 2; i++) {
-				Piece c = new Piece(getPivotPoint().getCol() - i,getPivotPoint().getRow(),cells[i].getType());
-				cells[i] = c;
-			}
-			cells[2] = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() + 1,cells[2].getType());
-			cells[3] = new Piece(getPivotPoint().getCol() - 1,getPivotPoint().getRow() - 1,cells[3].getType());
-		}
-		if (getRotationState() == 2) {
-			for (int i = 0; i < 2; i++) {
-				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() + i,cells[i].getType());
-				cells[i] = c;
-			}
-			cells[2] = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow(),cells[2].getType());
-			cells[3] = new Piece(getPivotPoint().getCol() - 1,getPivotPoint().getRow() + 1,cells[3].getType());
-		}
-		if (getRotationState() == 3) {
-			for (int i = 0; i < 2; i++) {
-				Piece c = new Piece(getPivotPoint().getCol() + i,getPivotPoint().getRow(),cells[i].getType());
-				cells[i] = c;
-			}
-			cells[2] = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 1,cells[2].getType());
-			cells[3] = new Piece(getPivotPoint().getCol() + 1,getPivotPoint().getRow() + 1,cells[3].getType());
-		}
-		
-		this.setCells(cells);
-		
-	}
-
-
-
-
-
-
-
-	
-
 }

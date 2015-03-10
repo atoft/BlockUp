@@ -53,4 +53,26 @@ public class Piece {
 	public boolean equals(Piece c) {
 		return (c.mCol == this.mCol && c.mRow == this.mRow);
 	}
+
+	public static void applyRotation(Piece[] pieces, int rotationState) {
+		if (rotationState == 0) return;
+		switch (rotationState) {
+			case 1:
+				for(int i = 0; i < pieces.length; i++) {
+					pieces[i] = new Piece(-pieces[i].getRow(), pieces[i].getCol(), pieces[i].getType());
+				}
+				break;
+			case 2:
+				for(int i = 0; i < pieces.length; i++) {
+					pieces[i] = new Piece(-pieces[i].getCol(), -pieces[i].getRow(), pieces[i].getType());
+				}
+				break;
+			case 3:
+				for(int i = 0; i < pieces.length; i++) {
+					pieces[i] = new Piece(pieces[i].getRow(), -pieces[i].getCol(), pieces[i].getType());
+				}
+				break;	
+		}
+		
+	}
 }

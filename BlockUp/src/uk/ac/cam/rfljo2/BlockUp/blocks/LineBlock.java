@@ -11,62 +11,12 @@ import java.util.Queue;
  *
  */
 public class LineBlock extends Block {
-	
-	
-	
 	public LineBlock() {
-		super(BlockType.CYAN);
-		Queue<Byte> q = new LinkedList<Byte>();
-		q.add((byte) 3);
-		q.add((byte) 2);
-		q.add((byte) 1);
-		q.add((byte) 0);
-		this.setRotationQueue(q);
+		Piece[] pieces = new Piece[4];
+		pieces[0] = new Piece(0, 0, BlockType.ORANGE);
+		pieces[1] = new Piece(1, 0, BlockType.ORANGE);
+		pieces[2] = new Piece(-1, 0, BlockType.ORANGE);
+		pieces[3] = new Piece(-2, 0, BlockType.ORANGE);
+		this.setPieces(pieces);
 	}
-
-	
-
-
-
-
-
-	@Override
-	public void regenerateCells() {
-		Piece[] cells = this.getCells();
-		if (getRotationState() == 0) {
-			for (int i = 0; i < 4; i++) {
-				Piece c = new Piece(getPivotPoint().getCol() - 2 + i,getPivotPoint().getRow(),cells[i].getType());
-				cells[i] = c;
-			}
-		}
-		if (getRotationState() == 1) {
-			for (int i = 0; i < 4; i++) {
-				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() +1 - i,cells[i].getType());
-				cells[i] = c;
-			}
-			
-		}
-		if (getRotationState() == 2) {
-			for (int i = 0; i < 4; i++) {
-				Piece c = new Piece(getPivotPoint().getCol() + 1 - i,getPivotPoint().getRow(),cells[i].getType());
-				cells[i] = c;
-			}
-		}
-		if (getRotationState() == 3) {
-			for (int i = 0; i < 4; i++) {
-				Piece c = new Piece(getPivotPoint().getCol(),getPivotPoint().getRow() - 2 + i,cells[i].getType());
-				cells[i] = c;
-			}
-			
-		}
-		this.setCells(cells);
-		
-		
-	}
-
-
-
-
-	
-
 }
