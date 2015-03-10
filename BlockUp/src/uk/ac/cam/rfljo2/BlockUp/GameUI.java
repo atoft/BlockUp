@@ -125,7 +125,6 @@ public class GameUI extends JFrame{
 		if(n==0){
 			//TODO: Not happy with UI referencing GameManager and vice versa like this
 			gameManager.restartGame();
-			System.out.println("restart the game");
 		}
 		else{
 			this.dispose();

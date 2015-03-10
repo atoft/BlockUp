@@ -52,15 +52,7 @@ public class GameManager {
 			List<Integer> clearedRows = mainBoard.clearFullRows();
 			if(clearedRows!=null){
 				output.viewScreen.flashBlocks(mainBoard, clearedRows);
-				
-				
-				
-				
-				
-			//	output.viewScreen.flashBlocks(mainBoard, clearedRows);
-				
 			}
-			//pause();
 			spawnNextBlock();
 			
 		}
@@ -100,9 +92,6 @@ public class GameManager {
 				break;
 			default:	result = new ReverseSquiggly();
 		}
-		
-		//result.makePowerBlock();
-		
 		return result;
 	}
 	/**
@@ -121,8 +110,6 @@ public class GameManager {
 		}
 		output.updateNextBlockScreen(nextBlock,nextBoard);
 		try {
-			//if (board.getActiveBlock().getBlockType() == 3 || board.getActiveBlock().getBlockType() == 5) board.getActiveBlock().place(4, 18, (byte)0);
-			//else{ 
 				activeBlock.setPivotPoint(new Piece(-10, -10,(byte) 0));
 				activeBlock.regenerateCells();
 				boolean success = activeBlock.place(4, 18, (byte)0,mainBoard);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
@@ -168,7 +155,6 @@ public class GameManager {
 			pause();
 		}
 	}
-	
 	/**
 	 * Method which returns the control listener.
 	 * First implementation.

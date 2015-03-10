@@ -79,12 +79,10 @@ public class GameViewScreen extends JPanel{
 		for(int y=0;y<(mBoardHeight);y++){
 			g.drawLine(0,mCellSize*y,width,mCellSize*y);
 		}
-		System.out.println("Frogs");
 
 		//Flash rows
 		if(flashState){
 			for(int i : flashRows){
-				System.out.println("Cheese");
 				g.setColor(java.awt.Color.white);
 				g.fillRect(0,i*mCellSize,width,mCellSize);
 			}
@@ -119,35 +117,16 @@ public class GameViewScreen extends JPanel{
 	 */
 	public void flashBlocks(GameBoard currentBoard, List<Integer>toFlash){
 		setFlashRows(toFlash);
-		setFlashState(true);
-		updateView(currentBoard);
-
-		setFlashState(false);
-		repaint();
-	
-		setFlashState(true);
-		repaint();
-	
-		setFlashState(false);
-		repaint();
 		
 		
-		
-		/* flashRows = toFlash;
-		mBoard = currentBoard;
 		Timer flashTimer = new Timer(flashDelay, new ActionListener() {
 			int rep = 0;
 			public void actionPerformed(ActionEvent e) {
-				if(rep > numFlashes){
-					doneFlashing=true;
-					return;
-				}
-				if(!flashState) flashState = true;
-				else flashState = false;
-				repaint();
-				rep++;
+				flashState = !flashState;
+				updateView(mBoard);
+		
 			}
 		});
-		flashTimer.start(); */
+		flashTimer.start();
 	}
 }
