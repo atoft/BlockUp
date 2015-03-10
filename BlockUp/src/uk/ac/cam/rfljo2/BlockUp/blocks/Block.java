@@ -1,10 +1,6 @@
 package uk.ac.cam.rfljo2.BlockUp.blocks;
 import uk.ac.cam.rfljo2.BlockUp.*;
 
-import java.awt.Color;
-import java.util.Queue;
-import java.util.Random;
-
 /**
  * A representation of a block in the game.
  * 
