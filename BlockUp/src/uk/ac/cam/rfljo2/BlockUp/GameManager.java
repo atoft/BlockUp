@@ -29,24 +29,15 @@ public class GameManager {
 	private int score = 0; // the amount of points the player as accumulated
 	
 	
-	/*
-	 * This timer performs the regular falling motion of the block.
-	 */
-	private Timer playTimer = new Timer(GameConstants.GAME_TIMER_DELAY, new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			moveActiveBlockUp();
-			output.refreshScreen(mainBoard);
-		}
-	});
-	
 	private static GameManager gm = null;
 	
-	private GameManager(){
+	//game manager is now a singleton
+	private GameManager() {
 		
 	}
 	
 	public void start() {
-		output = new GameUI(this);
+		output = new GameUI();
 		
 		mainBoard = new GameBoard(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);
 		nextBoard = new GameBoard(GameConstants.NEXT_VIEW_WIDTH,GameConstants.NEXT_VIEW_HEIGHT);
@@ -64,6 +55,15 @@ public class GameManager {
 		return gm;
 	}
 	
+	/*
+	 * This timer performs the regular falling motion of the block.
+	 */
+	private Timer playTimer = new Timer(GameConstants.GAME_TIMER_DELAY, new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			moveActiveBlockUp();
+			output.refreshScreen(mainBoard);
+		}
+	});
 	
 	/**
 	 * Randomly generates a new block and updates the NextBlock display

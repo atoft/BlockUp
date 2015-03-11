@@ -34,10 +34,10 @@ public class GameUI extends JFrame{
 	
 	
 	
-	public GameUI(GameManager g) {
+	public GameUI() {
 		super(Strings.GAME_NAME);				//Calls the parent constructor, setting the window title
 		
-		
+		GameManager g = GameManager.getInstance();
 		
 		setSize(500,680);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); //TODO: Probably not the desired operation, replace this later
