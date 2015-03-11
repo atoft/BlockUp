@@ -74,5 +74,4 @@ public class Piece {
 	public Piece rotate270() {
 		return new Piece(mY, -mX, mType);
 	}
-
 }

@@ -29,6 +29,7 @@ public class GameUI extends JFrame{
 	public GameViewScreen viewScreen;
 	public GameNextScreen nextBlockScreen;
 	private JButton pauseButton;
+	private JLabel score;
 	private static GameManager gameManager;
 	
 	
@@ -69,8 +70,8 @@ public class GameUI extends JFrame{
 		addBorder(scorePanel, Strings.GUI_SCORES_LABEL);
 		sidePanel.add(scorePanel);
 		
-		JLabel text = new JLabel("Scores and such");
-		scorePanel.add(text);
+		score = new JLabel("0");
+		scorePanel.add(score);
 		
 		JComponent optionPanel = new JPanel();
 		addBorder(optionPanel, Strings.GUI_OPTIONS_LABEL);
@@ -98,6 +99,7 @@ public class GameUI extends JFrame{
 	 * @param currentBoard The game board to display
 	 */
 	public void refreshScreen(GameBoard currentBoard){
+		score.setText(GameManager.getInstance().getScore() + "");
 		viewScreen.updateView(currentBoard);
 	}
 	

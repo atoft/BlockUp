@@ -32,13 +32,17 @@ public class GameBoard {
 	 * into a new Row array, fills the remaining cells with new empty Row objects,
 	 * and replaces the original array.
 	 * 
+	 * Returns the amount of points gained.
+	 * 
 	 */
-	public LinkedList<Integer> clearFullRows() {
+	public int clearFullRows() {
+		int points = 0;
+		int multiplier = 0;
 		boolean fullCheck = false;
 		for(Row r : mRows){
 			if (r.isFull()) { fullCheck = true; break; }
 		}
-		if(!fullCheck) return null;
+		if(!fullCheck) return 0;
 		
 		Row[] newArray = new Row[GameConstants.BOARD_HEIGHT];
 		LinkedList<Integer> removed = new LinkedList<Integer>();
@@ -47,15 +51,21 @@ public class GameBoard {
 			if(!r.isFull()){
 				newArray[index] = r;
 				index++;
+			} else {
+				removed.add(index);
+				byte[] rowCells = r.getCells();
+				for(int i = 0; i < rowCells.length; i++) {
+					points += 20;
+				}
+				multiplier++;
 			}
-			else removed.add(index);
 		}
 		for(int j = index; j<GameConstants.BOARD_HEIGHT;j++){
 			newArray[j]=new Row(GameConstants.BOARD_WIDTH);	
 		}
 		mRows = newArray;
 		
-		return removed;
+		return points * multiplier;
 	}
 	
 	/**
