@@ -41,13 +41,16 @@ public class GameManager {
 	});
 	
 	
-	public GameManager(GameUI g){
-		output = g;
+	public GameManager(){
+		output = new GameUI(this);
+		
 		mainBoard = new GameBoard(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);
 		nextBoard = new GameBoard(GameConstants.NEXT_VIEW_WIDTH,GameConstants.NEXT_VIEW_HEIGHT);
 		spawnNextBlock();
 		playTimer.start();
 		output.refreshScreen(mainBoard);
+		
+		output.setVisible(true);
 	}
 	
 	
@@ -290,8 +293,7 @@ public class GameManager {
 	 * @param args Takes no arguments
 	 */
 	public static void main(String[] args){
-		GameUI gui = new GameUI();
-		gui.setVisible(true);
+		GameManager game = new GameManager();
 		
 		
 	}

@@ -33,7 +33,7 @@ public class GameUI extends JFrame{
 	
 	
 	
-	public GameUI() {
+	public GameUI(GameManager g) {
 		super(Strings.GAME_NAME);				//Calls the parent constructor, setting the window title
 		
 		
@@ -52,7 +52,7 @@ public class GameUI extends JFrame{
 		viewPanel.add(viewScreen);
 		nextBlockScreen = new GameNextScreen(4,4);
 		
-		gameManager = new GameManager(this);
+		gameManager = g;
 		
 		JComponent sidePanel = Box.createVerticalBox();
 		add(sidePanel,BorderLayout.EAST);
