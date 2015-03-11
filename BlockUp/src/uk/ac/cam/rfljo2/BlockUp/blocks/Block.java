@@ -48,9 +48,44 @@ public class Block {
 	public int getRotationState() {
 		return mRotationState;
 	}
-	public void setRotationState(int state){
-		mRotationState=state;
+
+	/**
+	 * Sets the current state of rotation to the specified value
+	 * Then rotates the block.
+	 * @param rotationState the new value of the rotationState of this block
+	 */
+	public void setRotationState(int rotationState) {
+		mRotationState = (rotationState - mRotationState) % 4;
+		if(mRotationState < 0) mRotationState +=4;
+		rotate(mRotationState);
+		mRotationState = rotationState;
 	}
+	
+	/**
+	 * Implements the actual rotation of the block
+	 * The is the method to override if any.
+	 */
+	protected void rotate(int amount) {
+		switch(amount) {
+		case 1:
+			for(int i = 0; i < mPieces.length; i++) {
+				mPieces[i] = mPieces[i].rotate90();
+			}
+		break;
+		case 2:
+			for(int i = 0; i < mPieces.length; i++) {
+				mPieces[i] = mPieces[i].rotate180();
+			}
+		break;
+		case 3:
+			for(int i = 0; i < mPieces.length; i++) {
+				mPieces[i] = mPieces[i].rotate270();
+			}
+		break;
+		}
+	}
+
+
 
 	/**
 	 * Rotates the block clockwise by 90*,
