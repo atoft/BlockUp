@@ -34,7 +34,6 @@ public class GameManager {
 	 */
 	private Timer playTimer = new Timer(GameConstants.GAME_TIMER_DELAY, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			
 			moveActiveBlockUp();
 			output.refreshScreen(mainBoard);
 		}
@@ -92,6 +91,7 @@ public class GameManager {
 		
 		if(nextBlock != null){
 			mainBoard.placeBlock(); //The current block is stored in the gameBoard's array
+			mainBoard.clearFullRows(); //clear the full rows
 			activeBlock = nextBlock;
 			nextBlock = generateBlock();
 			
