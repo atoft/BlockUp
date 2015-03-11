@@ -9,4 +9,6 @@ public class GameConstants {
 	
 	public static final int BLOCK_SPAWN_POSITION_X = 4;
 	public static final int BLOCK_SPAWN_POSITION_Y = 18;
+	
+	public static final int GAME_TIMER_DELAY = 500;
 }

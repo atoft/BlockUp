@@ -11,8 +11,6 @@ import uk.ac.cam.rfljo2.BlockUp.blocks.*;
 
 
 /**
- * @Question Should GameManager and GameUI be integrated into the same Class?
- * 
  * Represents the main gameplay loop and includes references to a UI to display the game
  * and a GameBoard to contain the board.
  * 
@@ -23,7 +21,6 @@ import uk.ac.cam.rfljo2.BlockUp.blocks.*;
  */
 public class GameManager {
 	
-	private int timeDelay = 500;
 	public GameUI output;
 	private GameBoard mainBoard;
 	private GameBoard nextBoard;
@@ -31,9 +28,12 @@ public class GameManager {
 	private Block activeBlock;	// reference to the block on the board that is active and can be moved
 	private Block nextBlock;	// the block which will be added once the current block lands
 	
-	private Timer playTimer = new Timer(timeDelay, new ActionListener() {
+	
+	/*
+	 * This timer performs the regular falling motion of the block.
+	 */
+	private Timer playTimer = new Timer(GameConstants.GAME_TIMER_DELAY, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			//Do something
 			
 			moveActiveBlockUp();
 			output.refreshScreen(mainBoard);
@@ -49,6 +49,7 @@ public class GameManager {
 		playTimer.start();
 		output.refreshScreen(mainBoard);
 	}
+	
 	
 	/**
 	 * Randomly generates a new block and updates the NextBlock display
@@ -78,30 +79,33 @@ public class GameManager {
 
 		return result;
 	}
+	
+	
 	/**
 	 * Makes the next block into the active block and places it in the board.
 	 * A random block is generated to become the next block.
 	 */
 	public void spawnNextBlock(){
 		
-		
-		
 		if(nextBlock != null){
-			mainBoard.placeBlock();
+			mainBoard.placeBlock(); //The current block is stored in the gameBoard's array
 			activeBlock = nextBlock;
 			nextBlock = generateBlock();
 			
 		}
-		else{
+		else{	//The case in which the game has just started
 			activeBlock = generateBlock();
 			nextBlock = generateBlock();
 		}
+		
 		output.updateNextBlockScreen(nextBlock,nextBoard);
 		mainBoard.setActiveBlock(activeBlock);
+		
 		activeBlock.setX(GameConstants.BLOCK_SPAWN_POSITION_X);
 		activeBlock.setY(GameConstants.BLOCK_SPAWN_POSITION_Y);
 			
 		if(mainBoard.collisionTest(GameConstants.BLOCK_SPAWN_POSITION_X, GameConstants.BLOCK_SPAWN_POSITION_Y)){
+			//If the block collides in the initial position
 			gameOver();
 		}
 		
@@ -131,6 +135,9 @@ public class GameManager {
 		output.showGameOver();
 	}
 	
+	/**
+	 * Empties all rows in the main game board, restarts the timer and begins the game again.
+	 */
 	public void restartGame(){
 		//TODO: Reset scores
 		mainBoard.clearAllRows();
@@ -140,6 +147,38 @@ public class GameManager {
 			pause();
 		}
 	}
+	
+	/*
+	 * Methods for moving the current block (which is not actually placed in the board
+	 */
+	
+	protected void moveActiveBlockLeft() {
+		if(mainBoard.collisionTest(activeBlock.getX()-1, activeBlock.getY())==false){
+			activeBlock.setX(activeBlock.getX() - 1);
+		}
+	}
+
+	protected void moveActiveBlockRight() {
+		if(mainBoard.collisionTest(activeBlock.getX()+1, activeBlock.getY())==false){
+			activeBlock.setX(activeBlock.getX() + 1);
+		}
+	}
+
+	/**
+	 * Moves the active block up, unless there is a collision, in which case a new block
+	 * is spawned.
+	 */
+	protected void moveActiveBlockUp() {
+		if(mainBoard.collisionTest(activeBlock.getX(), activeBlock.getY()-1)==false){
+			activeBlock.setY(activeBlock.getY()-1);
+		}
+		else{
+			spawnNextBlock();
+		}
+		
+	}	
+	
+	
 	
 	/**
 	 * Method which returns the control listener.
@@ -244,32 +283,7 @@ public class GameManager {
 		};
 	}
 	
-	protected void moveActiveBlockLeft() {
-		if(mainBoard.collisionTest(activeBlock.getX()-1, activeBlock.getY())==false){
-			activeBlock.setX(activeBlock.getX() - 1);
-		}
-	}
 
-	protected void moveActiveBlockRight() {
-		if(mainBoard.collisionTest(activeBlock.getX()+1, activeBlock.getY())==false){
-			activeBlock.setX(activeBlock.getX() + 1);
-		}
-	}
-
-	/**
-	 * Moves the active block up, unless there is a collision, in which case a new block
-	 * is spawned.
-	 */
-	protected void moveActiveBlockUp() {
-		// TODO Auto-generated method stub
-		if(mainBoard.collisionTest(activeBlock.getX(), activeBlock.getY()-1)==false){
-			activeBlock.setY(activeBlock.getY()-1);
-		}
-		else{
-			spawnNextBlock();
-		}
-		
-	}
 
 	/**
 	 * This is the main method for the whole package
