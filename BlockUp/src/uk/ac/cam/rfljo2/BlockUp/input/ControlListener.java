@@ -1,5 +1,8 @@
 package uk.ac.cam.rfljo2.BlockUp.input;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * This interface defines all the possible control options that there are in the game.
  * All of the inputs are overridden in an anonymous class in GameManager.
@@ -7,34 +10,51 @@ package uk.ac.cam.rfljo2.BlockUp.input;
  * @author Tom Read-Cutting
  *
  */
-public interface ControlListener {
+public abstract class ControlListener implements ActionListener {
 	
-	public void rotateBlockLeft();
+	public static final String ROTATE_BLOCK_LEFT = "r";
+	public static final String ROTATE_BLOCK_RIGHT = "r";
+	public static final String MOVE_BLOCK_LEFT = "r";
+	public static final String MOVE_BLOCK_RIGHT = "r";
+	public static final String ROTATE_BLOCK_180 = "r";
+	public static final String SPEED_UP_BLOCK = "r";
+	public static final String PAUSE_GAME = "p";
 	
-	public void rotateBlockRight();
+	public abstract void rotateBlockLeft();
 	
-	public void moveBlockLeft();
+	public abstract void rotateBlockRight();
 	
-	public void moveBlockRight();
+	public abstract void moveBlockLeft();
 	
-	public void rotateBlock180();
+	public abstract void moveBlockRight();
 	
-	public void speedUpBlock();
+	public abstract void rotateBlock180();
 	
-	public void slamBlock();
+	public abstract void speedUpBlock();
 	
-	public void pauseGame();
+	public abstract void slamBlock();
 	
-	public void navigateUp();
+	public abstract void pauseGame();
 	
-	public void navigateDown();
+	public abstract void navigateUp();
 	
-	public void navigateLeft();
+	public abstract void navigateDown();
 	
-	public void navigateRight();
+	public abstract void navigateLeft();
 	
-	public void enter();
+	public abstract void navigateRight();
 	
-	public void goBack();
+	public abstract void enter();
+	
+	public abstract void goBack();
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch(e.getActionCommand()) {
+			case PAUSE_GAME:
+				pauseGame();
+			break;
+		}
+	}
 	
 }

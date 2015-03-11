@@ -55,10 +55,7 @@ public class Block {
 	 *
 	 */
 	public void rotateClockwise() {
-		mRotationState = (mRotationState + 1) % 4;
-		for(int i = 0; i < mPieces.length; i++) {
-			mPieces[i] = mPieces[i].rotate90();
-		}
+		setRotationState(mRotationState + 1);
 	}
 	
 	/**
@@ -66,7 +63,7 @@ public class Block {
 	 *
 	 */
 	public void rotateAntiClockwise() {
-		mRotationState = (mRotationState - 1) % 4;
+		setRotationState(mRotationState - 1);
 	}
 	
 	public void setX(int x) {
