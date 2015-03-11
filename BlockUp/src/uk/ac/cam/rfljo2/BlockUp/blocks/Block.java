@@ -48,7 +48,9 @@ public class Block {
 	public int getRotationState() {
 		return mRotationState;
 	}
-
+	public void setRotationState(int state){
+		mRotationState=state;
+	}
 
 	/**
 	 * Rotates the block clockwise by 90*,
