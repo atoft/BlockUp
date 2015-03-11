@@ -9,7 +9,6 @@ A temporary list of bugs and features that we need to discuss how to deal with.
 - Rotating a block when it is against the side can cause it to 'stick'
 - Remove random stuff being printed to the console. Basically formalise how we debug things. Possibly establish a 'DEBUG' mode.
 
-
 - Add a scoring system
 ? Use listeners and events to handle game logic
 - Add power-ups!
