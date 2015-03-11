@@ -6,4 +6,7 @@ public class GameConstants {
 	
 	public static final int NEXT_VIEW_WIDTH = 4;
 	public static final int NEXT_VIEW_HEIGHT = 4;
+	
+	public static final int BLOCK_SPAWN_POSITION_X = 4;
+	public static final int BLOCK_SPAWN_POSITION_Y = 18;
 }

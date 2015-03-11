@@ -87,8 +87,8 @@ public class GameBoard {
 	 * @return the byte value contained in the specified cell
 	 */
 	public byte getCell(int x, int y) {
-		if (y > mRows.length - 1 || y < 0) return -1; 
-		if (x > mRows[0].length() - 1 || x < 0) return -1;
+		if (y > mRows.length - 1 || y < 0) return BlockType.OUT_OF_BOUNDS; 
+		if (x > mRows[0].length() - 1 || x < 0) return BlockType.OUT_OF_BOUNDS;
 		return mRows[y].getCell(x);
 	}
 	
@@ -101,18 +101,35 @@ public class GameBoard {
 	}
 	
 	/**
+	 * Checks whether the current block, when moved to coordinates (x,y) collides with anything else
+	 * in the board.
 	 * 
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return True if a collision occurs.
 	 */
 	public boolean collisionTest(int x, int y){
+		
+
+			
 		for(Piece p : mActiveBlock.getPieces()){
-			if(this.getCell(p.getY() +y, p.getX() +x)!=-1 || this.getCell(p.getY(), p.getX())!=0){
+			int testX=p.getX()+x;
+			int testY=p.getY()+y;
+			
+			if(  (this.getCell(testX,testY)==BlockType.OUT_OF_BOUNDS || this.getCell(testX, testY)!=BlockType.EMPTY)){
+				
+				System.out.println("Collision at: "+testX+","+testY);
 				return true;
 			}
 		}
+		
 		return false;
 		
+	}
+	
+	public void placeBlock(){
+		for(Piece p : mActiveBlock.getPieces()){
+			this.setCell(p.getX()+mActiveBlock.getX(), p.getY()+mActiveBlock.getY(), p.getType());
+		}
 	}
 }

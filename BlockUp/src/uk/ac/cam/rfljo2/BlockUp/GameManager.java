@@ -37,32 +37,9 @@ public class GameManager {
 			
 			moveActiveBlockUp();
 			output.refreshScreen(mainBoard);
-			placementCheck();
 		}
 	});
 	
-	
-	/**
-	 * If the current block has landed, clear any full rows and
-	 * spawn the next block.
-	 */
-	private void placementCheck() {
-		/*if (activeBlock.isFinallyPlaced()){ 
-			List<Integer> clearedRows = mainBoard.clearFullRows();
-			if(clearedRows!=null){
-				output.viewScreen.flashBlocks(mainBoard, clearedRows);
-				/*
-				 * An initial attempt at displaying a flashing animation when the rows are cleared.
-				 * Doesn't behave properly because the game continues while the animation is
-				 * playing. TODO: Need a way to stop pause execution until the animation is done.
-				 *//*
-			}
-			spawnNextBlock();
-			
-		}*/
-		//TODO: Check if the block is off the screen
-		//TODO: Then place the block
-	}
 	
 	public GameManager(GameUI g){
 		output = g;
@@ -98,10 +75,7 @@ public class GameManager {
 				break;
 			default:	result = new ReverseSquiggly();
 		}
-		//result = new LBlock();
-		
-		//result.makePowerBlock();
-		
+
 		return result;
 	}
 	/**
@@ -109,7 +83,11 @@ public class GameManager {
 	 * A random block is generated to become the next block.
 	 */
 	public void spawnNextBlock(){
+		
+		
+		
 		if(nextBlock != null){
+			mainBoard.placeBlock();
 			activeBlock = nextBlock;
 			nextBlock = generateBlock();
 			
@@ -120,15 +98,12 @@ public class GameManager {
 		}
 		output.updateNextBlockScreen(nextBlock,nextBoard);
 		mainBoard.setActiveBlock(activeBlock);
-		//try {
-			activeBlock.setX(4);
-			activeBlock.setY(18);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
-			//TODO:!!!!!!!!!!!
-			//if(!success) gameOver();	//If success is false, the block cannot fit in the board, so the game ends.
-		//} catch (InvalidArgException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+		activeBlock.setX(GameConstants.BLOCK_SPAWN_POSITION_X);
+		activeBlock.setY(GameConstants.BLOCK_SPAWN_POSITION_Y);
+			
+		if(mainBoard.collisionTest(GameConstants.BLOCK_SPAWN_POSITION_X, GameConstants.BLOCK_SPAWN_POSITION_Y)){
+			gameOver();
+		}
 		
 	}
 
@@ -216,7 +191,6 @@ public class GameManager {
 					moveActiveBlockUp();
 					playTimer.restart();
 					output.refreshScreen(mainBoard);
-					placementCheck();
 				}
 			}
 
@@ -271,21 +245,28 @@ public class GameManager {
 	}
 	
 	protected void moveActiveBlockLeft() {
-		//TODO: Check if block CAN move left
-		activeBlock.setX(activeBlock.getX() - 1);
-		
+		if(mainBoard.collisionTest(activeBlock.getX()-1, activeBlock.getY())==false){
+			activeBlock.setX(activeBlock.getX() - 1);
+		}
 	}
 
 	protected void moveActiveBlockRight() {
-		//TODO: Check if block CAN move right
-		activeBlock.setX(activeBlock.getX() + 1);
-		
+		if(mainBoard.collisionTest(activeBlock.getX()+1, activeBlock.getY())==false){
+			activeBlock.setX(activeBlock.getX() + 1);
+		}
 	}
 
+	/**
+	 * Moves the active block up, unless there is a collision, in which case a new block
+	 * is spawned.
+	 */
 	protected void moveActiveBlockUp() {
 		// TODO Auto-generated method stub
 		if(mainBoard.collisionTest(activeBlock.getX(), activeBlock.getY()-1)==false){
 			activeBlock.setY(activeBlock.getY()-1);
+		}
+		else{
+			spawnNextBlock();
 		}
 		
 	}

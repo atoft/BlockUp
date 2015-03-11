@@ -39,25 +39,6 @@ public class Block {
 	}
 
 	/**
-	 * Hides the block from the GameBoard
-	 */ /*
-	public void hideBlock(GameBoard board) {
-		for (Piece c : mCells) {
-			board.setCell(c.getCol(), c.getRow(), (byte) 0);
-		}
-	}
-
-	/**
-	 * Shows the block on the GameBoard, based upon its current rotationState and pivotPoint
-	 */ /*
-	public void showBlock(GameBoard board) {
-		for (Piece c : mCells) {
-			board.setCell(c.getCol(), c.getRow(),c.getType());
-		}
-
-	} */
-
-	/**
 	 * Returns the current state of rotation of this 
 	 * 0 = ground state (Horizontal) 
 	 * 1 = rotated 90* Clockwise 
@@ -68,47 +49,6 @@ public class Block {
 		return mRotationState;
 	}
 
-	/**
-	 * Sets the current state of rotation to the specified value
-	 * @param rotationState the new value of the rotationState of this block
-	 */
-	//public void setRotationState(int rotationState) {
-	//	mRotationState = rotationState;
-	//}
-
-	
-	/**
-	 * Place the block at the specified position on the GameBoard
-	 * @param col the column at which to set the PivotPoint
-	 * @param row the row at which to set the PivotPoint
-	 * @param rotationState the rotation state of the new block when it is placed
-	 * @throws InvalidArgException if the rotationState is not valid for the type of block
-	 * @return true if the block can be successfully placed without collision
-	 *//*
-	public boolean place(int col, int row, byte rotationState, GameBoard board)
-			throws InvalidArgException {
-		if (rotationState < 0 || rotationState > 3)
-			throw new InvalidArgException();
-		byte oldRotationState = getRotationState();
-		Piece oldPivotPoint = getPivotPoint();
-		Piece c = new Piece(col, row,(byte) 0); //TODO: look at this
-		if (getPivotPoint() != null)
-			hideBlock(board);
-		setPivotPoint(c);
-		setRotationState(rotationState);
-		regenerateCells();
-		for (Piece d : mCells) {
-			if (board.getCell(d.getCol(), d.getRow()) != 0) {
-				setPivotPoint(oldPivotPoint);
-				setRotationState(oldRotationState);
-				regenerateCells();
-				showBlock(board);
-				return false;
-			}
-		}
-		this.showBlock(board);
-		return true;
-	} */
 
 	/**
 	 * Rotates the block clockwise by 90*,
