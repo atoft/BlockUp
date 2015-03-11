@@ -73,7 +73,7 @@ public class GameManager {
 	 */
 	public Block generateBlock(){
 		Random blockGen = new Random();
-		int nextBlock = blockGen.nextInt(7);
+		int nextBlock = blockGen.nextInt(6);
 		Block result;
 		switch(nextBlock){
 			case 0:		result = new LineBlock();
@@ -89,6 +89,12 @@ public class GameManager {
 			case 5:		result = new TBlock();
 				break;
 			default:	result = new ReverseSquiggly();
+		}
+		
+		int powerUp = blockGen.nextInt(5);
+		if(powerUp == 0) { //1 in 5 chance of a power up.
+			Piece[] ps = result.getPieces();
+			ps[0] = new Piece(ps[0].getX(), ps[0].getY(), PieceType.DOUBLE_SCORE);
 		}
 
 		return result;

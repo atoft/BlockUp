@@ -57,7 +57,7 @@ public abstract class GameScreen extends JPanel {
 				
 				byte currentType = mBoard.getCell(col,row);
 				if(currentType!=0){
-					g.setColor(BlockType.getColor(currentType));	//Convert the current cell type to a colo(u)r.
+					g.setColor(PieceType.getColor(currentType));	//Convert the current cell type to a colo(u)r.
 					g.fillRect(col*mCellSize,row*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
 				}
 			}
@@ -69,7 +69,7 @@ public abstract class GameScreen extends JPanel {
 			Piece bP = blockPieces[i];
 			byte type = bP.getType();
 			if(bP.getType() != 0) {
-				g.setColor(BlockType.getColor(type));
+				g.setColor(PieceType.getColor(type));
 				//fill in the rectangle at the correct offset
 				g.fillRect((bP.getX()+activeBlock.getX())*mCellSize,(bP.getY()+activeBlock.getY())*mCellSize,mCellSize,mCellSize);	//Fill the cell with the correct color.
 			}

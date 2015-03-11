@@ -54,10 +54,11 @@ public class GameBoard {
 			} else {
 				removed.add(index);
 				byte[] rowCells = r.getCells();
+				multiplier++;
 				for(int i = 0; i < rowCells.length; i++) {
 					points += 20;
+					if(rowCells[i] == PieceType.DOUBLE_SCORE) multiplier *= 2; //if the double score piece type appears!
 				}
-				multiplier++;
 			}
 		}
 		for(int j = index; j<GameConstants.BOARD_HEIGHT;j++){
@@ -97,8 +98,8 @@ public class GameBoard {
 	 * @return the byte value contained in the specified cell
 	 */
 	public byte getCell(int x, int y) {
-		if (y > mRows.length - 1 || y < 0) return BlockType.OUT_OF_BOUNDS; 
-		if (x > mRows[0].length() - 1 || x < 0) return BlockType.OUT_OF_BOUNDS;
+		if (y > mRows.length - 1 || y < 0) return PieceType.OUT_OF_BOUNDS; 
+		if (x > mRows[0].length() - 1 || x < 0) return PieceType.OUT_OF_BOUNDS;
 		return mRows[y].getCell(x);
 	}
 	
@@ -126,7 +127,7 @@ public class GameBoard {
 			int testX=p.getX()+x;
 			int testY=p.getY()+y;
 			
-			if(  (this.getCell(testX,testY)==BlockType.OUT_OF_BOUNDS || this.getCell(testX, testY)!=BlockType.EMPTY)){
+			if(  (this.getCell(testX,testY)==PieceType.OUT_OF_BOUNDS || this.getCell(testX, testY)!=PieceType.EMPTY)){
 				
 				System.out.println("Collision at: "+testX+","+testY);
 				return true;
