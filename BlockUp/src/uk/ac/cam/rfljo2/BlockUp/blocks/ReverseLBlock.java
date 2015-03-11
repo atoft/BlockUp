@@ -8,10 +8,10 @@ import uk.ac.cam.rfljo2.BlockUp.*;
 public class ReverseLBlock extends Block {	
 	public ReverseLBlock() {
 		Piece[] pieces = new Piece[4];
-		pieces[0] = new Piece(0, 0, BlockType.ORANGE);
-		pieces[1] = new Piece(-1, 0, BlockType.ORANGE);
-		pieces[2] = new Piece(1, 0, BlockType.ORANGE);
-		pieces[3] = new Piece(1, 1, BlockType.ORANGE);
+		pieces[0] = new Piece(0, 0, BlockType.BLUE);
+		pieces[1] = new Piece(-1, 0, BlockType.BLUE);
+		pieces[2] = new Piece(1, 0, BlockType.BLUE);
+		pieces[3] = new Piece(1, 1, BlockType.BLUE);
 		this.setPieces(pieces);
 	}
 }

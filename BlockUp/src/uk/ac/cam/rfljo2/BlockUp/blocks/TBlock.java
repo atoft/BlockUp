@@ -8,10 +8,10 @@ import uk.ac.cam.rfljo2.BlockUp.*;
 public class TBlock extends Block {
 	public TBlock() {
 		Piece[] pieces = new Piece[4];
-		pieces[0] = new Piece(0, 0, BlockType.ORANGE);
-		pieces[1] = new Piece(0, 1, BlockType.ORANGE);
-		pieces[2] = new Piece(-1, 0, BlockType.ORANGE);
-		pieces[3] = new Piece(1, 0, BlockType.ORANGE);
+		pieces[0] = new Piece(0, 0, BlockType.MAGENTA);
+		pieces[1] = new Piece(0, 1, BlockType.MAGENTA);
+		pieces[2] = new Piece(-1, 0, BlockType.MAGENTA);
+		pieces[3] = new Piece(1, 0, BlockType.MAGENTA);
 		this.setPieces(pieces);
 	}
 }
