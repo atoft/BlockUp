@@ -76,16 +76,17 @@ public class GameUI extends JFrame{
 		addBorder(optionPanel, Strings.GUI_OPTIONS_LABEL);
 		sidePanel.add(optionPanel);
 		
-		pauseButton = new JButton(Strings.GUI_OPTIONS_PAUSE);
-		optionPanel.add(pauseButton);
-		
-		
 		//the code which implements the keyboard controls using the listener
 		//a bit hacky atm but works so good point to commit as I have to go now so can't finish it :(
 		//can't rotate anymore
 		ControlListener cL = gameManager.getControlListener();
 		KeyBoardControls kBC = new KeyBoardControls(viewPanel);
 		kBC.setListener(cL);
+		
+		pauseButton = new JButton(Strings.GUI_OPTIONS_PAUSE);
+		optionPanel.add(pauseButton);
+		pauseButton.addActionListener(cL);
+		pauseButton.setActionCommand(ControlListener.PAUSE_GAME);
 		
 	}
 	
