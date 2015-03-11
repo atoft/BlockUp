@@ -1,11 +1,12 @@
 A temporary list of bugs and features that we need to discuss how to deal with.
 
 - Finish implementing new colour method (DONE)
-- Finish new implementation of blocks
+- Finish new implementation of blocks (DONE)
 
 - Replace all values repeated in many places ie. width and height with constants.
 - Row clearing animation (flashing) needs the ability to pause gameplay whilst it plays
 - Pressing quit on GameOver dialog does not properly kill the process
+- Rotating a block when it is against the side can cause it to 'stick'
 
 
 - Add a scoring system
