@@ -26,6 +26,7 @@ public class GameManager {
 	private boolean isPaused;
 	private Block activeBlock;	// reference to the block on the board that is active and can be moved
 	private Block nextBlock;	// the block which will be added once the current block lands
+	private int score = 0; // the amount of points the player as accumulated
 	
 	
 	/*
@@ -38,8 +39,13 @@ public class GameManager {
 		}
 	});
 	
+	private static GameManager gm = null;
 	
-	public GameManager(){
+	private GameManager(){
+		
+	}
+	
+	public void start() {
 		output = new GameUI(this);
 		
 		mainBoard = new GameBoard(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);
@@ -49,6 +55,13 @@ public class GameManager {
 		output.refreshScreen(mainBoard);
 		
 		output.setVisible(true);
+	}
+	
+	public static GameManager getInstance() {
+		if(gm == null) {
+			gm = new GameManager();
+		}
+		return gm;
 	}
 	
 	
@@ -90,7 +103,7 @@ public class GameManager {
 		
 		if(nextBlock != null){
 			mainBoard.placeBlock(); //The current block is stored in the gameBoard's array
-			mainBoard.clearFullRows(); //clear the full rows
+			score += mainBoard.clearFullRows(); //clear the full rows
 			activeBlock = nextBlock;
 			nextBlock = generateBlock();
 			
@@ -178,7 +191,15 @@ public class GameManager {
 			spawnNextBlock();
 		}
 		
-	}	
+	}
+	
+	/**
+	 * Returns the amount of points the player has
+	 * @return
+	 */
+	public int getScore() {
+		return score;
+	}
 	
 	
 	
@@ -283,18 +304,5 @@ public class GameManager {
 				
 			}	
 		};
-	}
-	
-
-
-	/**
-	 * This is the main method for the whole package
-	 * @param args Takes no arguments
-	 */
-	public static void main(String[] args){
-		GameManager game = new GameManager();
-		
-		
-	}
-		
+	}		
 }

@@ -37,6 +37,10 @@ public class Row {
 		
 	}
 	
+	public byte[] getCells() {
+		return mArray;
+	}
+	
 	
 	
 	/**
