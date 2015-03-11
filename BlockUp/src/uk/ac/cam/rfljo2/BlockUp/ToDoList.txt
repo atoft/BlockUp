@@ -1,12 +1,9 @@
 A temporary list of bugs and features that we need to discuss how to deal with.
 
-<<<<<<< HEAD
-- Finish implementing new colour method 
-=======
 - Finish implementing new colour method (DONE)
->>>>>>> branch 'master' of https://github.com/atoft/BlockUp.git
-- Fix problems with power block implementation (Tom?)
+- Finish new implementation of blocks
 
+- Replace all values repeated in many places ie. width and height with constants.
 - Row clearing animation (flashing) needs the ability to pause gameplay whilst it plays
 - Pressing quit on GameOver dialog does not properly kill the process
 
@@ -14,3 +11,23 @@ A temporary list of bugs and features that we need to discuss how to deal with.
 - Add a scoring system
 ? Use listeners and events to handle game logic
 - Add power-ups!
+
+
+=== Power Up Specifications ===
+
+One in n blocks contains a power up block which when cleared gives a special effect.
+
+Fire Block: 			Does something fiery.
+Heavy block:			Upon landing, smashes through the blocks directly above it
+Radioactive:			Causes some of the surrounding cells to decay over time, leaving gaps
+Shuffle:				Some groups of surrounding cells move positions, potentially shifting gaps around
+Air Strike: 			One or more missiles fire up at the board, making empty rows through it
+
+Triple Line:			The next 3 blocks are all lines
+Triple Square:			The next 3 blocks are all squares
+Tetris God's Revenge:	The next 3 blocks are all REVERSE SQUIGGLY!
+
+Colour Blind:			Remove all blocks of a certain colour
+
+
+

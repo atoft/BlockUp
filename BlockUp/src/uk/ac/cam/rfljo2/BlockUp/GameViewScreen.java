@@ -29,8 +29,17 @@ public class GameViewScreen extends JPanel{
 	
 	private boolean doneFlashing;
 	private boolean flashState;
-	List<Integer> flashRows;
 	
+	public void setFlashState(boolean flashState) {
+		this.flashState = flashState;
+	}
+
+	private List<Integer> flashRows;
+	
+	public void setFlashRows(List<Integer> flashRows) {
+		this.flashRows = flashRows;
+	}
+
 	public GameViewScreen(int width, int height){
 		mBoardWidth = width;
 		mBoardHeight = height;
@@ -83,7 +92,7 @@ public class GameViewScreen extends JPanel{
 		for(int y=0;y<(mBoardHeight);y++){
 			g.drawLine(0,mCellSize*y,width,mCellSize*y);
 		}
-		
+
 		//Flash rows
 		if(flashState){
 			for(int i : flashRows){
@@ -120,19 +129,15 @@ public class GameViewScreen extends JPanel{
 	 * @param toFlash The list of rows over which to display the animation
 	 */
 	public void flashBlocks(GameBoard currentBoard, List<Integer>toFlash){
-		flashRows = toFlash;
-		mBoard = currentBoard;
+		setFlashRows(toFlash);
+		
+		
 		Timer flashTimer = new Timer(flashDelay, new ActionListener() {
 			int rep = 0;
 			public void actionPerformed(ActionEvent e) {
-				if(rep > numFlashes){
-					doneFlashing=true;
-					return;
-				}
-				if(!flashState) flashState = true;
-				else flashState = false;
-				repaint();
-				rep++;
+				flashState = !flashState;
+				updateView(mBoard);
+		
 			}
 		});
 		flashTimer.start();
