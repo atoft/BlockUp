@@ -1,7 +1,6 @@
 package uk.ac.cam.rfljo2.BlockUp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -40,34 +39,11 @@ public class GameManager {
 	});
 	
 	
-<<<<<<< HEAD
 	public GameManager(){
 		output = new GameUI(this);
 		
 		mainBoard = new GameBoard(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);
 		nextBoard = new GameBoard(GameConstants.NEXT_VIEW_WIDTH,GameConstants.NEXT_VIEW_HEIGHT);
-=======
-	/**
-	 * If the current block has landed, clear any full rows and
-	 * spawn the next block.
-	 */
-	private void placementCheck(){
-		if (activeBlock.isFinallyPlaced()){ 
-			//pause();
-			List<Integer> clearedRows = mainBoard.clearFullRows();
-			if(clearedRows!=null){
-				output.viewScreen.flashBlocks(mainBoard, clearedRows);
-			}
-			spawnNextBlock();
-			
-		}
-	}
-	
-	public GameManager(GameUI g){
-		output = g;
-		mainBoard = new GameBoard(GameConstants.BOARD_HEIGHT,GameConstants.BOARD_WIDTH);
-		nextBoard = new GameBoard(GameConstants.NEXT_VIEW_HEIGHT,GameConstants.NEXT_VIEW_WIDTH);
->>>>>>> refs/remotes/origin/master
 		spawnNextBlock();
 		playTimer.start();
 		output.refreshScreen(mainBoard);
@@ -101,10 +77,7 @@ public class GameManager {
 				break;
 			default:	result = new ReverseSquiggly();
 		}
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
 		return result;
 	}
 	
@@ -128,7 +101,6 @@ public class GameManager {
 		}
 		
 		output.updateNextBlockScreen(nextBlock,nextBoard);
-<<<<<<< HEAD
 		mainBoard.setActiveBlock(activeBlock);
 		
 		activeBlock.setX(GameConstants.BLOCK_SPAWN_POSITION_X);
@@ -137,17 +109,6 @@ public class GameManager {
 		if(mainBoard.collisionTest(GameConstants.BLOCK_SPAWN_POSITION_X, GameConstants.BLOCK_SPAWN_POSITION_Y)){
 			//If the block collides in the initial position
 			gameOver();
-=======
-		try {
-				activeBlock.setPivotPoint(new Piece(-10, -10,(byte) 0));
-				activeBlock.regenerateCells();
-				boolean success = activeBlock.place(4, 18, (byte)0,mainBoard);	//TODO: Some blocks appear to place lower than others, due to pivots or something?
-				if(!success) gameOver();	//If success is false, the block cannot fit in the board, so the game ends.
-			//}
-		} catch (InvalidArgException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
->>>>>>> refs/remotes/origin/master
 		}
 		
 	}
@@ -188,7 +149,6 @@ public class GameManager {
 			pause();
 		}
 	}
-<<<<<<< HEAD
 	
 	/*
 	 * Methods for moving the current block (which is not actually placed in the board
@@ -222,8 +182,6 @@ public class GameManager {
 	
 	
 	
-=======
->>>>>>> refs/remotes/origin/master
 	/**
 	 * Method which returns the control listener.
 	 * First implementation.
