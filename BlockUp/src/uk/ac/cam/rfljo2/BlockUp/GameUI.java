@@ -131,6 +131,7 @@ public class GameUI extends JFrame{
 		}
 		else{
 			this.dispose();
+			System.exit(0);
 		}
 	}
 	
