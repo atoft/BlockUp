@@ -122,7 +122,7 @@ public class GameUI extends JFrame{
 	 */
 	public void showGameOver(){
 		Object[] options = {Strings.GUI_GAMEOVER_RESTART,Strings.GUI_GAMEOVER_QUIT};
-		int n = JOptionPane.showOptionDialog(this, Strings.GUI_GAMEOVER_MESSAGE, 
+		int n = JOptionPane.showOptionDialog(this, Strings.GUI_GAMEOVER_MESSAGE + GameManager.getInstance().getScore(), 
 				Strings.GUI_GAMEOVER_TITLE, JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 		//TODO: Display scores
 		if(n==0){
