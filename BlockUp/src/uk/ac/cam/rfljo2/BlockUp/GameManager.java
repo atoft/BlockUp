@@ -174,14 +174,28 @@ public class GameManager {
 	 */
 	
 	protected void moveActiveBlockLeft() {
-		if(mainBoard.collisionTest(activeBlock.getX()-1, activeBlock.getY())==false){
+		if(!mainBoard.collisionTest(activeBlock.getX()-1, activeBlock.getY())){
 			activeBlock.setX(activeBlock.getX() - 1);
+		}
+	}
+	
+	protected void rotateActiveBlockRight() {
+		activeBlock.rotateClockwise();
+		if(mainBoard.collisionTest(activeBlock.getX(), activeBlock.getY())){
+			activeBlock.rotateAntiClockwise();
 		}
 	}
 
 	protected void moveActiveBlockRight() {
-		if(mainBoard.collisionTest(activeBlock.getX()+1, activeBlock.getY())==false){
+		if(!mainBoard.collisionTest(activeBlock.getX()+1, activeBlock.getY())){
 			activeBlock.setX(activeBlock.getX() + 1);
+		}
+	}
+	
+	protected void rotateActiveBlockLeft() {
+		activeBlock.rotateAntiClockwise();
+		if(mainBoard.collisionTest(activeBlock.getX(), activeBlock.getY())){
+			activeBlock.rotateClockwise();
 		}
 	}
 
@@ -221,14 +235,14 @@ public class GameManager {
 			@Override
 			public void rotateBlockLeft() {
 				if(!isPaused){
-					activeBlock.rotateClockwise();
+					rotateActiveBlockLeft();
 					output.refreshScreen(mainBoard);
 				}
 			}
 
 			@Override
 			public void rotateBlockRight() {
-				activeBlock.rotateAntiClockwise();
+				rotateActiveBlockRight();
 			}
 
 			@Override
