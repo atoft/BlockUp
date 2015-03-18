@@ -1,4 +1,4 @@
-package uk.ac.cam.rfljo2.BlockUp;
+package uk.ac.cam.rfljo2.BlockUp.graphics;
 
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -7,6 +7,9 @@ import java.util.List;
 
 import javax.swing.*;
 
+import uk.ac.cam.rfljo2.BlockUp.GameBoard;
+import uk.ac.cam.rfljo2.BlockUp.Piece;
+import uk.ac.cam.rfljo2.BlockUp.PieceType;
 import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
 
 

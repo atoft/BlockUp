@@ -1,9 +1,10 @@
-package uk.ac.cam.rfljo2.BlockUp;
+package uk.ac.cam.rfljo2.BlockUp.graphics;
 
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import uk.ac.cam.rfljo2.BlockUp.GameBoard;
 import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
 
 /**

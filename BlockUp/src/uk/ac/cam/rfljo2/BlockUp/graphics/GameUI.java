@@ -1,4 +1,4 @@
-package uk.ac.cam.rfljo2.BlockUp;
+package uk.ac.cam.rfljo2.BlockUp.graphics;
 
 import javax.swing.*;	//TODO: Only import libraries which are needed
 
@@ -11,6 +11,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.Timer;
 
+import uk.ac.cam.rfljo2.BlockUp.GameBoard;
+import uk.ac.cam.rfljo2.BlockUp.GameConstants;
+import uk.ac.cam.rfljo2.BlockUp.GameManager;
+import uk.ac.cam.rfljo2.BlockUp.Strings;
 import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
 import uk.ac.cam.rfljo2.BlockUp.input.ControlListener;
 import uk.ac.cam.rfljo2.BlockUp.input.KeyBoardControls;
