@@ -21,8 +21,8 @@ import uk.ac.cam.rfljo2.BlockUp.blocks.Block;
  */
 public class GameViewScreen extends JPanel{
 
-	private int mBoardWidth = 10;
-	private int mBoardHeight = 20;
+	private int mBoardWidth;
+	private int mBoardHeight;
 	private int mCellSize = 30;
 	
 	private int flashDelay = 100;

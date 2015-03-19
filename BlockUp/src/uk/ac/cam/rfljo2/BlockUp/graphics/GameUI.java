@@ -55,7 +55,7 @@ public class GameUI extends JFrame{
 		
 		viewScreen = new GameViewScreen(GameConstants.BOARD_WIDTH,GameConstants.BOARD_HEIGHT);	//Creates an instance of our custom ViewScreen class
 		viewPanel.add(viewScreen);
-		nextBlockScreen = new GameNextScreen(4,4);
+		nextBlockScreen = new GameNextScreen(10,10);
 		
 		gameManager = g;
 		
